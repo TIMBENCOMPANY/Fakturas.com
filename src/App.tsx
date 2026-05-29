@@ -6,6 +6,7 @@ import {
   Globe, Briefcase, Menu, X, Layers, CreditCard, Lock, Percent,
   Sun, Moon, Send, MapPin, Mail
 } from "lucide-react";
+import { Analytics } from "@vercel/analytics/react";
 import InteractiveDashboard from "./components/InteractiveDashboard";
 import DashboardMockup from "./components/DashboardMockup";
 import AILoader from "./components/AILoader";
@@ -1199,6 +1200,7 @@ export default function App() {
 
       </main>
 
+      <Analytics />
     </div>
   );
 }
