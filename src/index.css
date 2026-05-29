@@ -38,37 +38,37 @@
   --font-mono: "JetBrains Mono", monospace;
 
   /* Premium luxury palette - Geometric Balance Theme */
-  --color-gold-50: #fefcf3;
-  --color-gold-100: #faf6de;
-  --color-gold-200: #fef4cf;
-  --color-gold-300: #F3C76B;
-  --color-gold-400: #F3C76B; /* Hotter Gold Accent from user */
-  --color-gold-500: #D4A64F; /* Trademark Luxury Light Gold from user */
-  --color-gold-600: #C2953E; /* Darker Gold Accent */
-  --color-gold-700: #937121;
-  --color-gold-800: #74571d;
-  --color-gold-900: #60471c;
+  --color-gold-50: #fdfbf2;
+  --color-gold-100: #fbf7da;
+  --color-gold-200: #fff4d2;
+  --color-gold-300: #ffeb99;
+  --color-gold-400: #F5C542; /* Hotter Gold Accent from user */
+  --color-gold-500: #F5C542; /* Trademark Luxury Light Gold from user */
+  --color-gold-600: #E4B22B; /* Darker Gold Accent */
+  --color-gold-700: #C5971C;
+  --color-gold-800: #a27b13;
+  --color-gold-900: #7d5e0b;
 
   --color-royal-50: #f0f4fa;
-  --color-royal-105: #081120; /* Darker navy accent panel */
-  --color-royal-110: #0d1a33; /* Ambient accent panels */
+  --color-royal-105: #0a142c; /* Darker navy accent panel */
+  --color-royal-110: #0e1e3e; /* Ambient accent panels */
   --color-royal-200: #bed1ea;
   --color-royal-300: #94b2da;
   --color-royal-400: #658cc7;
   --color-royal-500: #456db4;
   --color-royal-600: #335496;
   --color-royal-700: #29437a;
-  --color-royal-800: #1b274c;
-  --color-royal-900: #081120; /* Deep navy blue background component */
-  --color-royal-950: #050816; /* Main Cinematic Dark Black-Navy Canvas */
+  --color-royal-800: #1c2e5e;
+  --color-royal-900: #0a142c; /* Deep navy blue background component */
+  --color-royal-950: #050B1A; /* Main Cinematic Dark Black-Navy Canvas */
 
   --animate-pulse-slow: pulse 6s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   --animate-spin-slow: spin 20s linear infinite;
   --animate-float: float 6s ease-in-out infinite;
   --animate-glow: glow 4s ease-in-out infinite;
 
-  --shadow-gold-heavy: 0 10px 35px -5px rgba(212, 166, 79, 0.22);
-  --shadow-gold-subtle: 0 4px 25px -2px rgba(212, 166, 79, 0.06);
+  --shadow-gold-heavy: 0 10px 35px -5px rgba(245, 197, 66, 0.35);
+  --shadow-gold-subtle: 0 4px 25px -2px rgba(245, 197, 66, 0.12);
 }
 
 @keyframes float {
@@ -84,8 +84,8 @@
 /* Base custom styles to ensure luxury typography and dark mode transitions */
 body {
   font-family: var(--font-sans);
-  background-color: var(--color-royal-950);
-  background-image: radial-gradient(circle at 50% 0%, #081120 0%, #050816 100%);
+  background-color: #050B1A;
+  background-image: radial-gradient(circle at 50% 0%, #0a142c 0%, #050B1A 100%);
   background-attachment: fixed;
   overflow-x: hidden;
 }
@@ -96,42 +96,42 @@ body {
   height: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #050816;
+  background: #050B1A;
 }
 ::-webkit-scrollbar-thumb {
-  background: #0d1a33;
+  background: #0e1e3e;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #D4A64F;
+  background: #F5C542;
 }
 
 /* Glassmorphism utility card */
 .glass-panel {
-  background: rgba(8, 17, 32, 0.4);
+  background: rgba(10, 20, 44, 0.55);
   backdrop-filter: blur(12px) saturate(140%);
   -webkit-backdrop-filter: blur(12px) saturate(140%);
-  border: 1px solid rgba(212, 166, 79, 0.08);
+  border: 1px solid rgba(245, 197, 66, 0.1);
 }
 
 .glass-panel-heavy {
-  background: rgba(8, 17, 32, 0.7);
+  background: rgba(10, 20, 44, 0.8);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(212, 166, 79, 0.12);
+  border: 1px solid rgba(245, 197, 66, 0.15);
 }
 
 .gold-border-glow {
-  border: 1px solid rgba(212, 166, 79, 0.08);
-  box-shadow: 0 0 15px -1px rgba(212, 166, 79, 0.03);
+  border: 1px solid rgba(245, 197, 66, 0.1);
+  box-shadow: 0 0 15px -1px rgba(245, 197, 66, 0.05);
 }
 .gold-border-glow:hover {
-  border-color: rgba(212, 166, 79, 0.25);
-  box-shadow: 0 0 25px -3px rgba(212, 166, 79, 0.1);
+  border-color: rgba(245, 197, 66, 0.3);
+  box-shadow: 0 0 25px -3px rgba(245, 197, 66, 0.15);
 }
 
 .text-gold-gradient {
-  background: linear-gradient(to right, #D4A64F, #F3C76B, #D4A64F);
+  background: linear-gradient(to right, #F5C542, #ffeb99, #F5C542);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -139,7 +139,7 @@ body {
 }
 
 .text-gold-pure-gradient {
-  background: linear-gradient(135deg, #F3C76B 0%, #D4A64F 50%, #C2953E 100%);
+  background: linear-gradient(135deg, #ffeb99 0%, #F5C542 50%, #C5971C 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -147,15 +147,15 @@ body {
 
 /* Geometric Balance buttons and shadows */
 .btn-gold-brand {
-  background: linear-gradient(to right, #D4A64F, #C2953E);
-  color: #050816;
-  box-shadow: 0 10px 25px -5px rgba(212, 166, 79, 0.18);
+  background: linear-gradient(to right, #F5C542, #E4B22B);
+  color: #050B1A;
+  box-shadow: 0 10px 25px -5px rgba(245, 197, 66, 0.3);
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .btn-gold-brand:hover {
-  filter: brightness(1.1);
+  filter: brightness(1.15);
   transform: translateY(-1px);
-  box-shadow: 0 12px 30px -4px rgba(212, 166, 79, 0.28);
+  box-shadow: 0 12px 30px -4px rgba(245, 197, 66, 0.4);
 }
 
 .border-geom-subtle {

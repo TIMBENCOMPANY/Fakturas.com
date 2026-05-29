@@ -7,7 +7,9 @@ import {
   Sun, Moon, Send, MapPin, Mail
 } from "lucide-react";
 import InteractiveDashboard from "./components/InteractiveDashboard";
+import DashboardMockup from "./components/DashboardMockup";
 import AILoader from "./components/AILoader";
+import TemplatesSection from "./components/TemplatesSection";
 import { FakturasLogo, FakturasTextLogo } from "./components/FakturasLogo";
 import { Invoice } from "./types";
 // @ts-ignore
@@ -89,7 +91,6 @@ export default function App() {
   const [syntheticInvoice, setSyntheticInvoice] = useState<Invoice | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(true);
-  const [isPosterExpanded, setIsPosterExpanded] = useState(false);
 
   // Contact Form State
   const [contactName, setContactName] = useState("");
@@ -183,34 +184,32 @@ export default function App() {
   return (
     <div className={`min-h-screen transition-colors duration-500 overflow-hidden relative ${
       isDarkMode 
-        ? "bg-[#050816] text-slate-100 selection:bg-[#D4A64F] selection:text-[#050816]" 
-        : "bg-[#FAF8F5] text-slate-800 selection:bg-[#D4A64F] selection:text-white"
+        ? "bg-[#050B1A] text-slate-100 selection:bg-[#F5C542] selection:text-[#050B1A]" 
+        : "bg-[#FAF8F5] text-slate-800 selection:bg-[#F5C542] selection:text-white"
     }`}>
       
-      {/* Dynamic Fixed Ambient Studio Backdrop Image */}
+      {/* Dynamic Fixed Ambient Studio Grid Backdrop */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
-        <img 
-          src={heroScene} 
-          alt="Studio Background Texture" 
-          className={`w-full h-full object-cover scale-102 transition-all duration-700 blur-[3px] select-none ${
-            isDarkMode 
-              ? "opacity-15 mix-blend-luminosity brightness-75 contrast-125" 
-              : "opacity-8 mix-blend-overlay brightness-105 contrast-95"
-          }`}
-          referrerPolicy="no-referrer"
+        {/* Subtle grid lines, extremely faint */}
+        <div 
+          className="absolute inset-0 bg-[linear-gradient(to_right,rgba(128,128,128,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(128,128,128,0.05)_1px,transparent_1px)] bg-[size:32px_32px]"
+          style={{
+            maskImage: "radial-gradient(ellipse 60% 50% at 50% 30%, #000 70%, transparent 100%)",
+            WebkitMaskImage: "radial-gradient(ellipse 60% 50% at 50% 30%, #000 70%, transparent 100%)"
+          }}
         />
         {/* Soft elegant gradient mesh blending into native layout colors */}
         <div className={`absolute inset-0 transition-colors duration-500 bg-gradient-to-b ${
           isDarkMode 
-            ? "from-[#050816]/70 via-[#081120]/90 to-[#050816]" 
-            : "from-white/80 via-[#FAF8F5]/92 to-[#FAF8F5]"
+            ? "from-[#050B1A]/80 via-[#0a142c]/95 to-[#050B1A]" 
+            : "from-[#FCFAF7]/90 via-[#FAF8F5]/96 to-[#FAF8F5]"
         }`}></div>
       </div>
 
       {/* Absolute blurred gradients orbs */}
-      <div className={`absolute top-[-100px] left-1/2 -translate-x-1/2 w-[1000px] h-[600px] rounded-full bg-radial-gradient ${isDarkMode ? 'from-[#D4A64F]/10' : 'from-[#D4A64F]/15'} to-transparent blur-3xl pointer-events-none z-0`}></div>
-      <div className={`absolute top-[800px] left-[-200px] w-[500px] h-[500px] rounded-full ${isDarkMode ? 'bg-[#D4A64F]/5' : 'bg-[#D4A64F]/8'} blur-3xl pointer-events-none z-0`}></div>
-      <div className={`absolute top-[1800px] right-[-200px] w-[600px] h-[600px] rounded-full ${isDarkMode ? 'bg-royal-600/10' : 'bg-[#D4A64F]/5'} blur-3xl pointer-events-none z-0`}></div>
+      <div className={`absolute top-[-100px] left-1/2 -translate-x-1/2 w-[1000px] h-[600px] rounded-full bg-radial-gradient ${isDarkMode ? 'from-[#F5C542]/10' : 'from-[#F5C542]/15'} to-transparent blur-3xl pointer-events-none z-0`}></div>
+      <div className={`absolute top-[800px] left-[-200px] w-[500px] h-[500px] rounded-full ${isDarkMode ? 'bg-[#F5C542]/5' : 'bg-[#F5C542]/8'} blur-3xl pointer-events-none z-0`}></div>
+      <div className={`absolute top-[1800px] right-[-200px] w-[600px] h-[600px] rounded-full ${isDarkMode ? 'bg-royal-600/10' : 'bg-[#F5C542]/5'} blur-3xl pointer-events-none z-0`}></div>
 
       {/* AI Synthesizer loading screen */}
       {isAiLoading && (
@@ -221,47 +220,43 @@ export default function App() {
       )}
 
       {/* LUXURY STICKY NAVIGATION BAR WITH GLASS BLUR */}
-      <header className={`sticky top-0 left-0 right-0 w-full z-40 backdrop-blur-lg border-b transition-all duration-300 ${
+      <header className={`sticky top-0 left-0 right-0 w-full z-40 backdrop-blur-md border-b transition-all duration-300 ${
         isDarkMode 
-          ? "bg-[#050816]/80 border-white/5 text-slate-100" 
-          : "bg-white/80 border-slate-200/60 text-slate-800"
+          ? "bg-[#050B1A]/80 border-white/5 text-slate-100" 
+          : "bg-[#FCFAF7]/85 border-slate-200/50 text-slate-800"
       }`}>
-        <div className="max-w-7xl mx-auto px-6 sm:px-8 py-4.5 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-6 sm:px-8 py-5 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <FakturasTextLogo isDarkMode={isDarkMode} />
           </div>
 
-          <nav className={`flex items-center gap-8 max-md:hidden text-xs font-semibold tracking-wider transition-colors ${
-            isDarkMode ? "text-slate-350" : "text-slate-600"
+          <nav className={`flex items-center gap-11 max-md:hidden text-sm font-medium transition-colors ${
+            isDarkMode ? "text-slate-400" : "text-slate-600"
           }`}>
-            <a href="#features" className="hover:text-gold-400 relative py-2 px-1 transition-colors group">
-              FEATURES
-              <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-gradient-to-r from-gold-500 to-gold-400 group-hover:w-full transition-all duration-300 rounded-full"></span>
+            <a href="#features" className={`relative py-1.5 px-0.5 transition-colors group ${isDarkMode ? "hover:text-white" : "hover:text-slate-950"}`}>
+              Features
             </a>
-            <a href="#ai-assistant" className="hover:text-gold-400 relative py-2 px-1 transition-colors flex items-center gap-1.5 group">
-              NEURAL INVOICING 
-              <span className="bg-[#D4A64F]/10 text-[#D4A64F] text-[8px] font-sans px-1.5 py-0.5 rounded border border-[#D4A64F]/20 uppercase tracking-widest animate-pulse">NEW</span>
-              <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-gradient-to-r from-gold-500 to-gold-400 group-hover:w-full transition-all duration-300 rounded-full"></span>
+            <a href="#dashboard-play" className={`relative py-1.5 px-0.5 transition-colors flex items-center gap-1.5 group ${isDarkMode ? "hover:text-white" : "hover:text-slate-950"}`}>
+              Invoice Builder
+              <span className="bg-[#F5C542]/10 text-[#F5C542] text-[8.5px] font-mono px-1.5 py-0.5 rounded border border-[#F5C542]/20 uppercase tracking-widest font-bold">New</span>
             </a>
-            <a href="#pricing" className="hover:text-gold-400 relative py-2 px-1 transition-colors group">
-              PRICING
-              <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-gradient-to-r from-gold-500 to-gold-400 group-hover:w-full transition-all duration-300 rounded-full"></span>
+            <a href="#pricing" className={`relative py-1.5 px-0.5 transition-colors group ${isDarkMode ? "hover:text-white" : "hover:text-slate-950"}`}>
+              Pricing
             </a>
-            <a href="#contact" className="hover:text-gold-400 relative py-2 px-1 transition-colors group">
-              CONTACT
-              <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-gradient-to-r from-gold-500 to-gold-400 group-hover:w-full transition-all duration-300 rounded-full"></span>
+            <a href="#contact" className={`relative py-1.5 px-0.5 transition-colors group ${isDarkMode ? "hover:text-white" : "hover:text-slate-950"}`}>
+              Contact
             </a>
           </nav>
 
-          <div className="flex items-center gap-4 max-md:hidden">
+          <div className="flex items-center gap-5 max-md:hidden">
             {/* Theme toggle switch */}
             <button 
               onClick={() => setIsDarkMode(!isDarkMode)} 
               title={isDarkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
               className={`p-2 rounded-full border transition-all active:scale-95 flex items-center justify-center cursor-pointer ${
                 isDarkMode 
-                  ? "border-[#D4A64F]/20 bg-[#D4A64F]/5 text-[#D4A64F] hover:bg-[#D4A64F]/15" 
-                  : "border-slate-300 bg-slate-100 text-slate-700 hover:bg-slate-200"
+                  ? "border-white/10 bg-white/[0.02] text-[#F5C542] hover:bg-white/[0.05]" 
+                  : "border-slate-200 bg-slate-50 text-slate-600 hover:bg-slate-100"
               }`}
             >
               {isDarkMode ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
@@ -269,17 +264,17 @@ export default function App() {
 
             <button 
               onClick={scrollToPlayground}
-              className={`px-4 py-2 text-xs font-semibold tracking-wider uppercase transition-colors cursor-pointer ${
-                isDarkMode ? "hover:text-white text-slate-400" : "hover:text-black text-slate-600"
+              className={`text-sm font-medium transition-colors cursor-pointer ${
+                isDarkMode ? "hover:text-white text-slate-400" : "hover:text-slate-905 text-slate-600"
               }`}
             >
-              Log In
+              Log in
             </button>
             <button 
               onClick={scrollToPlayground}
-              className="px-5 py-2.5 bg-gradient-to-r from-[#D4A64F] to-[#C2953E] text-[#050816] rounded-xl text-xs font-bold tracking-wider uppercase shadow-lg shadow-[#D4A64F]/10 hover:brightness-110 hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer"
+              className="px-4.5 py-2 bg-[#F5C542] text-[#050B1A] rounded-xl text-xs font-bold tracking-wide transition-all hover:brightness-110 shadow-lg shadow-[#F5C542]/15 active:scale-[0.98] cursor-pointer"
             >
-              Start Free
+              Start free
             </button>
           </div>
 
@@ -288,7 +283,7 @@ export default function App() {
             <button 
               onClick={() => setIsDarkMode(!isDarkMode)} 
               className={`p-1.5 rounded-full border ${
-                isDarkMode ? "border-[#D4A64F]/20 text-[#D4A64F]" : "border-slate-300 text-slate-700"
+                isDarkMode ? "border-[#F5C542]/20 text-[#F5C542]" : "border-slate-300 text-slate-700"
               }`}
             >
               {isDarkMode ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
@@ -305,16 +300,16 @@ export default function App() {
         {/* Mobile Dropdown menu */}
         {mobileMenuOpen && (
           <div className={`md:hidden border-t p-6 flex flex-col gap-4 font-sans text-xs text-center transition-all ${
-            isDarkMode ? "bg-[#050816] border-white/5 text-slate-100" : "bg-white border-slate-200 text-slate-800"
+            isDarkMode ? "bg-[#050B1A] border-white/5 text-slate-100" : "bg-white border-slate-200 text-slate-800"
           }`}>
             <a href="#features" onClick={() => setMobileMenuOpen(false)} className="hover:text-gold-400 block py-1">FEATURES</a>
-            <a href="#ai-assistant" onClick={() => setMobileMenuOpen(false)} className="hover:text-gold-400 block py-1 text-gold-400">NEURAL CORE</a>
+            <a href="#dashboard-play" onClick={() => setMobileMenuOpen(false)} className="hover:text-gold-400 block py-1 text-gold-400">INVOICE BUILDER</a>
             <a href="#pricing" onClick={() => setMobileMenuOpen(false)} className="hover:text-gold-400 block py-1">PRICING</a>
             <a href="#contact" onClick={() => setMobileMenuOpen(false)} className="hover:text-gold-400 block py-1">CONTACT</a>
             <div className={`h-[1px] my-2 ${isDarkMode ? "bg-white/5" : "bg-slate-200"}`}></div>
             <button 
               onClick={() => { setMobileMenuOpen(false); scrollToPlayground(); }}
-              className="bg-gradient-to-r from-[#D4A64F] to-[#C2953E] text-[#050816] font-semibold tracking-wider py-2.5 rounded-xl block cursor-pointer"
+              className="bg-gradient-to-r from-[#F5C542] to-[#E4B22B] text-[#050B1A] font-semibold tracking-wider py-2.5 rounded-xl block cursor-pointer text-center"
             >
               LAUNCH PLATFORM
             </button>
@@ -330,129 +325,107 @@ export default function App() {
           <div className="grid grid-cols-1 lg:grid-cols-[42%_58%] gap-4 lg:gap-0 items-center w-full relative z-10 overflow-visible">
             
             {/* LEFT COLUMN: HERO CONTENT AND COPYS */}
-            <div className="space-y-5 md:space-y-6 flex flex-col justify-center text-left overflow-visible pr-2">
+            <div className="space-y-4 md:space-y-6 flex flex-col justify-center text-left overflow-visible pr-2">
               
               {/* Premium Top Capsule Badge */}
-              <div className={`inline-flex self-start items-center gap-2 px-3.5 py-1.5 rounded-full transition-colors select-none ${
+              <div className={`inline-flex self-start items-center gap-2 px-3.5 py-1.5 rounded-full transition-all select-none shadow-[0_2px_15px_rgba(245,197,66,0.12)] border ${
                 isDarkMode 
-                  ? "bg-[#081120]/60 border border-[#D4A64F]/20" 
-                  : "bg-gold-500/10 border border-[#D4A64F]/30"
+                  ? "bg-[#0a142c]/80 border-[#F5C542]/30 text-[#F5C542]" 
+                  : "bg-gold-100 border-[#F5C542]/35 text-[#a27b13]"
               }`}>
-                <Sparkles className="w-3.5 h-3.5 text-gold-500 animate-pulse" />
-                <span className={`text-[9px] font-sans tracking-[0.25em] uppercase font-light ${isDarkMode ? "text-gold-400" : "text-[#7a5c0e]"}`}>
+                <Sparkles className="w-3.5 h-3.5 text-[#F5C542] animate-pulse" />
+                <span className={`text-[9px] font-sans tracking-[0.25em] uppercase font-semibold ${isDarkMode ? "text-gold-300" : "text-gold-800"}`}>
                   AI-POWERED INVOICING
                 </span>
-                <ChevronRight className="w-3 h-3 text-gold-500" />
+                <ChevronRight className="w-3 h-3 text-[#F5C542]" />
               </div>
 
               {/* Luxury Headline */}
-              <h1 className={`font-serif-luxury text-5xl sm:text-6xl md:text-7.5xl lg:text-7xl xl:text-8.5xl tracking-tight leading-[1.02] ${isDarkMode ? "text-white" : "text-black"} flex flex-col gap-1.5`}>
+              <h1 className={`font-serif-luxury text-4xl sm:text-6xl md:text-7.5xl lg:text-7xl xl:text-8.5xl tracking-tight leading-[0.98] ${isDarkMode ? "text-white" : "text-black"} flex flex-col gap-1 sm:gap-1.5`}>
                 <span className={isDarkMode ? "font-light text-white" : "font-light text-black"}>Invoicing</span>
                 <span className="text-gold-pure-gradient font-semibold">Simplified.</span>
-                <span className={`${isDarkMode ? "font-light text-white" : "font-light text-black"} mt-1`}>Business</span>
+                <span className={`${isDarkMode ? "font-light text-white" : "font-light text-black"} mt-0.5 sm:mt-1`}>Business</span>
                 <span className="text-gold-pure-gradient font-semibold">Amplified.</span>
               </h1>
 
               {/* Description styled in SAFIRA MARCH / premium sans-serif typography */}
               <p className={`text-xs sm:text-sm leading-relaxed max-w-[480px] transition-colors duration-300 font-sans font-light tracking-wide ${
-                isDarkMode ? 'text-slate-400' : 'text-slate-600'
+                isDarkMode ? 'text-slate-350' : 'text-slate-650'
               }`}>
                 Create professional invoices, track payments and get paid faster. All in one smart platform built for modern businesses.
               </p>
 
               {/* Luxury CTA buttons */}
-              <div className="flex flex-wrap items-center gap-4">
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full max-w-[480px]">
                 <button 
                   onClick={scrollToPlayground}
-                  className="bg-gradient-to-r from-[#D4A64F] to-[#C2953E] hover:brightness-110 text-[#050816] font-light text-xs tracking-[0.2em] uppercase px-8 py-4.5 rounded-xl transition-all hover:scale-[1.02] shadow-lg shadow-[#D4A64F]/15 flex items-center gap-2 cursor-pointer"
+                  className="bg-[#F5C542] hover:bg-[#ffeb99] text-[#050B1A] font-semibold text-xs tracking-[0.2em] uppercase py-4.5 px-8 rounded-xl transition-all duration-300 hover:scale-[1.015] active:scale-[0.985] shadow-[0_12px_45px_rgba(245,197,66,0.35)] flex items-center justify-center gap-2 cursor-pointer border border-[#F5C542]/20"
                 >
                   Start Free
-                  <ArrowRight className="w-4 h-4" />
+                  <ArrowRight className="w-4 h-4 shrink-0" />
                 </button>
                 <button 
                   onClick={scrollToPlayground}
-                  className={`border font-light text-xs tracking-[0.2em] uppercase px-8 py-4.5 rounded-xl transition-all flex items-center gap-2 cursor-pointer ${
+                  className={`border border-[#F5C542]/50 hover:border-[#F5C542] font-semibold text-xs tracking-[0.2em] uppercase py-4.5 px-8 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer ${
                     isDarkMode 
-                      ? 'bg-[#081120]/60 text-slate-300 hover:text-white border-white/5 hover:bg-[#081120]' 
-                      : 'bg-white text-slate-700 hover:text-black border-slate-200 hover:bg-slate-50 shadow-sm'
+                      ? 'bg-[#050B1A]/40 text-[#F5C542] hover:text-white hover:bg-white/5 hover:shadow-[0_0_15px_rgba(245,197,66,0.15)] shadow-md' 
+                      : 'bg-white text-slate-800 hover:text-black border-slate-300 hover:bg-slate-50 shadow-sm'
                   }`}
                 >
-                  <Play className="w-3 h-3 text-gold-555 fill-gold-500" />
+                  <Play className="w-3 h-3 text-[#F5C542] fill-[#F5C542] shrink-0" />
                   Watch Demo
                 </button>
               </div>
 
               {/* Sub-features icons row below buttons */}
-              <div className={`grid grid-cols-2 gap-4 sm:gap-6 pt-8 max-sm:grid-cols-1 border-t ${isDarkMode ? "border-white/5" : "border-slate-150"}`}>
+              <div className={`grid grid-cols-2 gap-3.5 sm:gap-6 pt-6 max-sm:grid-cols-1 border-t ${isDarkMode ? "border-white/5" : "border-slate-150"}`}>
                 <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-xl bg-gold-500/10 border border-gold-500/20 text-gold-400 flex items-center justify-center shrink-0">
-                    <Sparkles className="w-4 h-4 text-gold-500" />
+                  <div className="w-9 h-9 rounded-xl bg-[#F5C542]/10 border border-[#F5C542]/20 text-[#F5C542] flex items-center justify-center shrink-0 shadow-[0_0_10px_rgba(245,197,66,0.05)]">
+                    <Sparkles className="w-4 h-4 text-[#F5C542]" />
                   </div>
                   <div>
-                    <h4 className={`text-[10px] font-light tracking-[0.15em] uppercase ${isDarkMode ? "text-slate-300" : "text-slate-900"}`}>AI Invoice Generator</h4>
+                    <h4 className={`text-[10px] font-light tracking-[0.15em] uppercase ${isDarkMode ? "text-slate-350" : "text-slate-900"}`}>AI Invoice Generator</h4>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-xl bg-gold-500/10 border border-gold-500/20 text-gold-400 flex items-center justify-center shrink-0">
-                    <Coins className="w-4 h-4 text-gold-500" />
+                  <div className="w-9 h-9 rounded-xl bg-[#F5C542]/10 border border-[#F5C542]/20 text-[#F5C542] flex items-center justify-center shrink-0 shadow-[0_0_10px_rgba(245,197,66,0.05)]">
+                    <Coins className="w-4 h-4 text-[#F5C542]" />
                   </div>
                    <div>
-                    <h4 className={`text-[10px] font-light tracking-[0.15em] uppercase ${isDarkMode ? "text-slate-300" : "text-slate-900"}`}>Smart Payment Tracking</h4>
+                    <h4 className={`text-[10px] font-light tracking-[0.15em] uppercase ${isDarkMode ? "text-slate-350" : "text-slate-900"}`}>Smart Payment Tracking</h4>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-xl bg-gold-500/10 border border-gold-500/20 text-gold-400 flex items-center justify-center shrink-0">
-                    <ShieldCheck className="w-4 h-4 text-gold-500" />
+                  <div className="w-9 h-9 rounded-xl bg-[#F5C542]/10 border border-[#F5C542]/20 text-[#F5C542] flex items-center justify-center shrink-0 shadow-[0_0_10px_rgba(245,197,66,0.05)]">
+                    <ShieldCheck className="w-4 h-4 text-[#F5C542]" />
                   </div>
                   <div>
-                    <h4 className={`text-[10px] font-light tracking-[0.15em] uppercase ${isDarkMode ? "text-slate-300" : "text-slate-900"}`}>Automated Reminders</h4>
+                    <h4 className={`text-[10px] font-light tracking-[0.15em] uppercase ${isDarkMode ? "text-slate-350" : "text-slate-900"}`}>Automated Reminders</h4>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-xl bg-gold-500/10 border border-gold-500/20 text-gold-400 flex items-center justify-center shrink-0">
-                    <TrendingUp className="w-4 h-4 text-gold-500" />
+                  <div className="w-9 h-9 rounded-xl bg-[#F5C542]/10 border border-[#F5C542]/20 text-[#F5C542] flex items-center justify-center shrink-0 shadow-[0_0_10px_rgba(245,197,66,0.05)]">
+                    <TrendingUp className="w-4 h-4 text-[#F5C542]" />
                   </div>
                   <div>
-                    <h4 className={`text-[10px] font-light tracking-[0.15em] uppercase ${isDarkMode ? "text-slate-300" : "text-slate-900"}`}>Real-Time Analytics</h4>
+                    <h4 className={`text-[10px] font-light tracking-[0.15em] uppercase ${isDarkMode ? "text-slate-350" : "text-slate-900"}`}>Real-Time Analytics</h4>
                   </div>
                 </div>
               </div>
 
             </div>
 
-            {/* RIGHT COLUMN: BEAUTIFUL CINEMATIC HERO DESIGN - LARGE POSTER SAAS PREVIEW */}
-            <div className="relative flex justify-center lg:justify-end items-center z-20 w-full overflow-visible lg:-mt-14 xl:-mt-20 lg:-mr-8">
+            {/* RIGHT COLUMN: REALISTIC SAAS DASHBOARD MOCKUP PREVIEW */}
+            <div className="relative flex justify-center lg:justify-end items-center z-20 w-full overflow-visible lg:-mt-6 lg:-mr-6">
               <div 
-                onClick={() => setIsPosterExpanded(true)}
-                className="relative w-full lg:w-[130%] xl:w-[145%] 2xl:w-[155%] lg:max-w-none origin-center group/laptop cursor-pointer transition-all duration-500 overflow-visible lg:-ml-16 xl:-ml-24 2xl:-ml-28"
-                title="Click to view crystal-clear studio poster"
+                className="relative w-full lg:w-[124%] xl:w-[138%] 2xl:w-[145%] lg:max-w-none origin-center group/dashboard transition-all duration-500 overflow-visible lg:-ml-12 xl:-ml-16"
               >
-                {/* Soft gold ambient lighting behind the massive poster */}
-                <div className="absolute -inset-12 bg-gradient-to-tr from-[#D4A64F]/25 to-royal-500/15 rounded-[4rem] blur-[90px] opacity-100 group-hover/laptop:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
+                {/* Soft gold ambient lighting/glow effect around the important dashboard component */}
+                <div className="absolute -inset-8 bg-gradient-to-tr from-[#F5C542]/20 to-royal-500/10 rounded-[3rem] blur-[80px] opacity-100 group-hover/dashboard:scale-105 transition-transform duration-700 pointer-events-none"></div>
                 
-                {/* Pristine clean display frame with subtle gold border, premium Apple-style shadow */}
-                <div className={`relative border rounded-2xl overflow-hidden p-1.5 transition-all duration-500 hover:scale-[1.01] hover:shadow-[0_55px_130px_rgba(212,166,79,0.25)] ${
-                  isDarkMode 
-                    ? 'border-white/10 bg-[#050816]/70 shadow-[0_50px_130px_rgba(0,0,0,0.95),0_0_80px_rgba(212,166,79,0.2)]' 
-                    : 'border-slate-200 bg-white shadow-[0_50px_130px_rgba(212,166,79,0.15),0_0_60px_rgba(212,166,79,0.08)]'
-                }`}>
-                  <img 
-                    src={heroScene} 
-                    alt="Fakturas Premium Invoicing Realistic Cinematic Dashboard"
-                    className="w-full h-auto object-contain rounded-xl select-none"
-                    referrerPolicy="no-referrer"
-                  />
-                  
-                  {/* Cinematic gloss reflection */}
-                  <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-transparent pointer-events-none rounded-xl"></div>
-
-                  {/* Hover overlay indicator */}
-                  <div className="absolute inset-0 bg-black/60 opacity-0 group-hover/laptop:opacity-100 transition-opacity duration-300 flex items-center justify-center rounded-xl">
-                    <div className="backdrop-blur-md bg-white/10 border border-[#D4A64F]/50 text-white font-sans text-xs font-semibold tracking-wider px-6 py-3 rounded-xl shadow-xl flex items-center gap-2">
-                      <Sparkles className="w-4 h-4 text-gold-400 animate-pulse" />
-                      EXPAND CINEMATIC PREVIEW
-                    </div>
-                  </div>
+                {/* Stunning bespoke dashboard mockup component displaying live mock stats */}
+                <div className="relative transform hover:scale-[1.015] transition-transform duration-300">
+                  <DashboardMockup isDarkMode={isDarkMode} />
                 </div>
               </div>
             </div>
@@ -464,13 +437,13 @@ export default function App() {
         <section className="relative z-10 max-w-7xl mx-auto px-6 pt-2 text-center flex flex-col items-center">
           {/* Quick conversational prompt input at Hero Section */}
           <div className="w-full max-w-2xl mb-12 text-center">
-            <p className={`text-[10px] font-mono mb-3 block uppercase tracking-[0.2em] font-semibold ${isDarkMode ? "text-slate-500" : "text-slate-400"}`}>
+            <p className={`text-[10px] font-mono mb-3 block uppercase tracking-[0.2em] font-semibold ${isDarkMode ? "text-[#F5C542]" : "text-slate-500"}`}>
               DIRECT DECK SYNTHESIZER
             </p>
-            <div className={`w-full p-2.5 rounded-2xl transition-all duration-300 ${
+            <div className={`w-full p-2.5 rounded-2xl transition-all duration-300 shadow-sm ${
               isDarkMode 
-                ? 'bg-royal-900/40 border border-royal-800/80 focus-within:border-gold-500/30' 
-                : 'bg-white border border-slate-200 shadow-md focus-within:border-[#D4AF37]/50'
+                ? 'bg-[#0a142c]/65 border border-white/5 focus-within:border-[#F5C542]/30' 
+                : 'bg-white border border-slate-200 focus-within:border-[#F5C542]/55 shadow-md'
             }`}>
               <form onSubmit={handleHeroSubmit} className="flex gap-2">
                 <input 
@@ -478,11 +451,11 @@ export default function App() {
                   value={heroPrompt}
                   onChange={(e) => setHeroPrompt(e.target.value)}
                   placeholder="Type e.g., 'Invoice SpaceX for 20 hours at $300/hour plus 10% VAT code applied'..."
-                  className={`flex-grow bg-transparent border-none focus:outline-none focus:ring-0 text-xs px-3 font-mono placeholder:text-slate-500 ${isDarkMode ? 'text-white' : 'text-slate-800'}`}
+                  className={`flex-grow bg-transparent border-none focus:outline-none focus:ring-0 text-xs px-3 font-mono placeholder:text-slate-400 ${isDarkMode ? 'text-white' : 'text-slate-800'}`}
                 />
                 <button 
                   type="submit"
-                  className="bg-gradient-to-r from-[#D4AF37] to-[#B8860B] hover:brightness-110 text-royal-950 font-bold text-[11px] font-mono px-5 py-2.5 rounded-lg shrink-0 flex items-center gap-1.5 transition-all shadow-md cursor-pointer"
+                  className="bg-gradient-to-r from-[#F5C542] to-[#E4B22B] text-[#050B1A] font-bold text-[11px] font-mono px-5 py-2.5 rounded-lg shrink-0 flex items-center gap-1.5 transition-all shadow-md hover:brightness-110 cursor-pointer"
                 >
                   Synthesize
                 </button>
@@ -490,13 +463,65 @@ export default function App() {
             </div>
           </div>
 
+          {/* DEDICATED LIVE PRODUCT PREVIEW HEADER */}
+          <div className="w-full max-w-4xl text-center space-y-3 mt-4 mb-2">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#F5C542]/10 border border-[#F5C542]/20 text-[#F5C542] text-[9.5px] font-mono uppercase tracking-[0.15em] font-semibold">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#F5C542] animate-ping" />
+              <span>Interactive Application Sandbox</span>
+            </div>
+            <h2 className={`font-serif-luxury text-3xl sm:text-5xl tracking-tight transition-colors duration-300 ${isDarkMode ? "text-white" : "text-slate-900"}`}>
+              Live Product Preview
+            </h2>
+            <p className={`text-xs sm:text-sm max-w-2xl mx-auto leading-relaxed transition-colors duration-300 ${isDarkMode ? "text-slate-400" : "text-slate-600"}`}>
+              Test the actual invoice generation module below. Experience how easily Fakturas handles smart currency translation, automated ledger matching, and direct compliant billing output.
+            </p>
+          </div>
+
+          {/* DEDICATED CONFIDENCE / TRUST INDICATORS ROW */}
+          <div className="w-full max-w-5xl grid grid-cols-5 gap-3.5 max-lg:grid-cols-3 max-sm:grid-cols-2 mt-2 px-1 text-center">
+            {[
+              { label: "Secure", detail: "SOC-2 + SSL Encryption", desc: "Bank-grade transmission protocols", icon: ShieldCheck },
+              { label: "GDPR Ready", detail: "Privacy Aligned", desc: "100% compliant data nodes", icon: Lock },
+              { label: "VAT Support", detail: "Article 203 Compliant", desc: "Automatic international tax checking", icon: Percent },
+              { label: "Multi Currency", detail: "Universal FX Router", desc: "Supports USD, EUR, GBP, AUD, SGD", icon: Globe },
+              { label: "PDF Export", detail: "Single-Click Dispatch", desc: "Pristine, designer-ready printables", icon: Download }
+            ].map((indicator, idx) => {
+              const Icon = indicator.icon;
+              return (
+                <div 
+                  key={idx} 
+                  className={`p-4 rounded-xl border flex flex-col items-center justify-between transition-all duration-300 group/trust ${
+                    isDarkMode 
+                      ? "border-white/5 bg-[#0a142c]/40 hover:border-[#F5C542]/20 hover:bg-[#0a142c]/60" 
+                      : "border-slate-200/60 bg-white/60 shadow-[0_4px_20px_rgba(245,197,66,0.02)] hover:shadow-[0_10px_30px_rgba(245,197,66,0.06)] hover:border-[#F5C542]/30"
+                  }`}
+                >
+                  <div className="w-8 h-8 rounded-lg bg-[#F5C542]/10 border border-[#F5C542]/20 flex items-center justify-center text-[#F5C542] shrink-0 mb-2 transition-transform group-hover/trust:scale-110">
+                    <Icon className="w-4 h-4" />
+                  </div>
+                  <div className="space-y-1">
+                    <h5 className={`text-[11px] font-bold tracking-tight ${isDarkMode ? "text-white" : "text-slate-900"}`}>
+                      {indicator.label}
+                    </h5>
+                    <p className={`text-[9.5px] font-medium leading-none text-[#F5C542]`}>
+                      {indicator.detail}
+                    </p>
+                    <p className="text-[8.5px] leading-tight text-slate-400 font-light max-sm:hidden">
+                      {indicator.desc}
+                    </p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
           {/* LANDING TARGET - INTERACTIVE WORKSPACE */}
-          <div id="dashboard-play" ref={dashboardRef} className="w-full relative py-8">
-            <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-[350px] bg-royal-600/5 blur-3xl pointer-events-none z-0"></div>
-            <div className={`relative z-10 p-2.5 border rounded-3xl transition-all duration-300 ${
+          <div id="dashboard-play" ref={dashboardRef} className="w-full relative py-6">
+            <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-[350px] bg-[#F5C542]/5 blur-3xl pointer-events-none z-0"></div>
+            <div className={`relative z-10 p-2 border rounded-3xl transition-all duration-300 ${
               isDarkMode 
-                ? 'border-gold-500/10 bg-royal-950/20 shadow-gold-subtle' 
-                : 'border-slate-200 bg-white/45 shadow-xl shadow-slate-100/50'
+                ? 'border-white/5 bg-[#0a142c]/30 shadow-gold-subtle' 
+                : 'border-slate-200/60 bg-white/80 shadow-[0_20px_60px_rgba(245,197,66,0.05),0_4px_30px_rgba(0,0,0,0.02)]'
             }`}>
               <InteractiveDashboard 
                 onAiStart={triggerInvoicingSynthesizer}
@@ -516,7 +541,7 @@ export default function App() {
           <p className="text-[10px] font-mono tracking-[0.25em] text-slate-500 uppercase mb-8">GLOBAL FINTECH TRANSFERS VERIFIED IN PARTNERSHIP WITH</p>
           <div className="max-w-7xl mx-auto px-6 flex flex-wrap items-center justify-around gap-8 text-sm font-display font-semibold tracking-wider text-slate-500/50 select-none">
             {["STRI-PE", "COINBASE", "DROP-BOX", "V-ERCEL", "APP_LE", "SL-ACK", "REVOLUT"].map((brand, idx) => (
-              <span key={idx} className="hover:text-[#D4A64F]/50 transition-colors uppercase tracking-[0.2em]">{brand}</span>
+              <span key={idx} className="hover:text-[#F5C542]/55 transition-colors uppercase tracking-[0.2em]">{brand}</span>
             ))}
           </div>
         </section>
@@ -529,16 +554,14 @@ export default function App() {
             <p className={`text-xs sm:text-sm max-w-xl mx-auto transition-colors duration-300 ${isDarkMode ? "text-slate-400" : "text-slate-650"}`}>Pragmatic, beautifully packaged elements certified for automated global transaction compliance.</p>
           </div>
 
-          <div className="grid grid-cols-4 gap-6 max-xl:grid-cols-2 max-sm:grid-cols-1">
+          <div className="grid grid-cols-3 max-xl:grid-cols-2 max-sm:grid-cols-1 gap-6">
             {[
-              { id: "feat-1", title: "AI Invoice Generator", desc: "Instantly compile billing schemas by stating conversational statements directly. No manual data entry ever again.", icon: Sparkles, gold: true },
-              { id: "feat-2", title: "Smart Payment Tracking", desc: "Real-time ledger state updates synchronized with SWIFT and direct bank routing channels universally.", icon: Coins },
-              { id: "feat-3", title: "Automatic Reminders", desc: "Automated direct warnings to client financial controllers when payment due date windows are crossed.", icon: ShieldCheck },
-              { id: "feat-4", title: "Multi Currency Support", desc: "Instant valuation exchange rate parsing. Compatible with USD, EUR, GBP, CAD and Swiss Francs.", icon: Globe },
-              { id: "feat-5", title: "Tax & VAT Automation", desc: "Dual integrated VAT calculation codes adhering strictly component by component to Article 203 EU rules.", icon: Percent },
-              { id: "feat-6", title: "Real-Time Analytics", desc: "Visualize historical payment velocity, cash outflows, and project net yields with premium vectors and graphs.", icon: TrendingUp },
-              { id: "feat-7", title: "Vector PDF Export", desc: "Compile raw, gorgeous invoices directly into pixel-perfect high-contrast PDF documents for immediate print.", icon: Download },
-              { id: "feat-8", title: "Client Management", desc: "Map contacts, fiscal numbers, legal addresses, and special tax arrangements under structured profiles.", icon: Users },
+              { id: "feat-1", title: "AI Invoice Generator", desc: "Generate professional invoices in seconds. Instantly compile billing schemas by stating conversational details in natural language.", icon: Sparkles, gold: true },
+              { id: "feat-2", title: "Client Management", desc: "Manage clients and billing history. Track customer profiles, billing addresses, and tax credentials in unified directories.", icon: Users },
+              { id: "feat-3", title: "Recurring Billing", desc: "Automate recurring invoices. Set up subscription payment cycles or retainer billings mapped to automatic reminders.", icon: Layers },
+              { id: "feat-4", title: "Payment Tracking", desc: "Track paid and unpaid invoices. Monitor live remittances, payout states, and outstanding balances in real-time.", icon: CreditCard },
+              { id: "feat-5", title: "VAT & Tax Support", desc: "Handle tax calculations easily. Automatic regional tax compliance standard checking, customized rates, and international VAT parsing.", icon: Percent },
+              { id: "feat-6", title: "PDF Export", desc: "Export invoices instantly. Compile raw documents directly into pixel-perfect, vector-sharp PDF invoices with a single click.", icon: Download },
             ].map((feat) => {
               const Icon = feat.icon;
               return (
@@ -546,30 +569,33 @@ export default function App() {
                   key={feat.id}
                   className={`p-8 rounded-2xl border transition-all duration-300 relative group/card min-h-[250px] flex flex-col justify-start ${
                     feat.gold 
-                      ? "border-[#D4A64F]/35 bg-[#D4A64F]/5 shadow-lg shadow-[#D4A64F]/5 hover:border-[#F3C76B] hover:shadow-[0_0_30px_rgba(212,166,79,0.15)] hover:-translate-y-1" 
+                      ? "border-[#F5C542]/35 bg-[#F5C542]/5 shadow-lg shadow-[#F5C542]/5 hover:border-[#F5C542] hover:shadow-[0_0_30px_rgba(245,197,66,0.2)] hover:-translate-y-1" 
                       : isDarkMode
-                        ? "border-white/5 bg-[#081120]/40 backdrop-blur-md hover:border-[#F3C76B]/45 hover:bg-[#081120]/75 hover:shadow-[0_0_35px_rgba(212,166,79,0.08)] hover:-translate-y-1.5"
-                        : "border-slate-200/70 bg-white shadow-sm hover:shadow-md hover:border-[#D4A64F]/40 hover:-translate-y-1.5"
+                        ? "border-white/5 bg-[#0a142c]/40 backdrop-blur-md hover:border-[#F5C542]/45 hover:bg-[#0a142c]/75 hover:shadow-[0_0_35px_rgba(245,197,66,0.12)] hover:-translate-y-1.5"
+                        : "border-slate-200/70 bg-white shadow-sm hover:shadow-md hover:border-[#F5C542]/40 hover:-translate-y-1.5"
                   }`}
                 >
                   <div className={`w-11 h-11 rounded-xl flex items-center justify-center mb-6 border transition-all duration-300 ${
                     feat.gold 
-                      ? "bg-gold-500/20 border-gold-400/40 text-gold-450" 
+                      ? "bg-[#F5C542]/20 border-[#F5C542]/40 text-[#F5C542]" 
                       : isDarkMode
                         ? "bg-[#0d1a33]/80 border-white/5 text-slate-400 group-hover/card:text-gold-400 group-hover/card:border-[#F3C76B]/30 group-hover/card:scale-105"
-                        : "bg-slate-50 border-slate-205 text-slate-600 group-hover/card:text-gold-500 group-hover/card:border-gold-500/30 group-hover/card:scale-105"
+                        : "bg-slate-50 border-slate-25 text-slate-600 group-hover/card:text-gold-500 group-hover/card:border-gold-500/30 group-hover/card:scale-105"
                   }`}>
                     <Icon className="w-5.5 h-5.5" />
                   </div>
                   <h3 className={`font-display font-semibold mb-2 tracking-wide text-base transition-colors ${
                     isDarkMode ? "text-white group-hover/card:text-gold-400" : "text-slate-900 group-hover/card:text-gold-600"
                   }`}>{feat.title}</h3>
-                  <p className={`text-xs leading-relaxed font-sans transition-colors duration-300 ${isDarkMode ? "text-slate-450" : "text-slate-600"}`}>{feat.desc}</p>
+                  <p className={`text-xs leading-relaxed font-sans transition-colors duration-300 ${isDarkMode ? "text-slate-400" : "text-slate-600"}`}>{feat.desc}</p>
                 </div>
               );
             })}
           </div>
         </section>
+
+        {/* 3.5. PREMIUM INVOICE TEMPLATES SECTION */}
+        <TemplatesSection isDarkMode={isDarkMode} />
 
         {/* 4. FUTURISTIC AI SECTION */}
         <section id="ai-assistant" className="max-w-7xl mx-auto px-6 relative text-left">
@@ -582,13 +608,13 @@ export default function App() {
             
             <div className="space-y-6">
               <div className="inline-flex items-center gap-1.5 bg-gold-500/15 border border-gold-500/30 px-3.5 py-1 rounded-full text-[10px] font-mono tracking-widest text-[#D4AF37] uppercase">
-                Neural Billing Console
+                AI Invoicing Assistant
               </div>
               <h2 className={`font-display font-bold text-3xl sm:text-4xl tracking-tight leading-tight transition-colors duration-300 ${isDarkMode ? "text-white" : "text-[#07122A]"}`}>
                 “Generate invoices with <span className="text-gold-gradient">one sentence.</span>”
               </h2>
               <p className={`text-xs sm:text-sm leading-relaxed font-sans transition-colors duration-300 ${isDarkMode ? "text-slate-400" : "text-slate-600"}`}>
-                Fakturas' AI translation parser digests details like quantities, currency symbols, VAT clauses, discounts, and terms from simple sentences. Watch AI compile compliance-approved ledgers in real-time.
+                Fakturas' AI Assistant digests details like quantities, currency symbols, tax rates, and client terms from simple sentences. Watch AI compile structured invoices in real-time.
               </p>
 
               <div className="space-y-3.5 text-xs font-mono">
@@ -628,9 +654,9 @@ export default function App() {
               <div className={`flex items-center justify-between border-b pb-3 mb-4 ${isDarkMode ? "border-royal-850" : "border-slate-200"}`}>
                 <div className="flex items-center gap-2">
                   <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                  <span className={`font-bold text-[10px] tracking-wider uppercase ${isDarkMode ? "text-white" : "text-slate-850"}`}>Neural Node live</span>
+                  <span className={`font-bold text-[10px] tracking-wider uppercase ${isDarkMode ? "text-white" : "text-slate-850"}`}>AI Assistant live</span>
                 </div>
-                <span className="text-[9px] text-slate-500">SECURE SHELL</span>
+                <span className="text-[9px] text-slate-500">REALTIME LINK</span>
               </div>
 
               <div className="space-y-4 mb-4 select-none text-left">
@@ -679,18 +705,11 @@ export default function App() {
           </div>
 
           <div className="grid grid-cols-3 gap-8 max-xl:gap-4 max-lg:grid-cols-1 max-w-5xl mx-auto text-left">
-            
-            {/* Tier 1 */}
             <div className={`p-8 rounded-2xl border flex flex-col justify-between transition-all duration-300 relative overflow-hidden ${
               isDarkMode 
-                ? "border-white/5 bg-[#081120]/40 backdrop-blur-md hover:border-[#F3C76B]/30 hover:bg-[#081120]/60" 
-                : "border-slate-200 bg-white shadow-sm hover:shadow-md hover:border-[#D4A64F]/50"
-            } ${!isDarkMode ? "opacity-60 saturate-[40%] bg-slate-50/50" : ""}`}>
-              {!isDarkMode && (
-                <div className="absolute top-4 right-4 bg-slate-200/50 text-slate-500 text-[8px] font-sans font-bold tracking-widest px-2.5 py-1 rounded">
-                  UNAVAILABLE IN LIGHT MODE
-                </div>
-              )}
+                ? "border-white/5 bg-[#0a142c]/40 backdrop-blur-md hover:border-[#F5C542]/30 hover:bg-[#0a142c]/65" 
+                : "border-slate-200 bg-white shadow-[0_8px_30px_rgb(0,0,0,0.015)] hover:shadow-[0_20px_50px_rgba(245,197,66,0.06)] hover:border-[#F5C542]/35"
+            }`}>
               <div>
                 <span className="text-[10px] font-sans text-slate-500 tracking-wider block mb-1">INDEPENDENT</span>
                 <h3 className={`font-display font-semibold tracking-wide text-lg mb-4 ${isDarkMode ? "text-white" : "text-slate-900"}`}>Starter</h3>
@@ -700,7 +719,7 @@ export default function App() {
                 </div>
                 <p className={`text-xs mb-6 leading-relaxed ${isDarkMode ? "text-slate-400" : "text-slate-600"}`}>Perfect starting package for freelancers, sole traders, and independent developers.</p>
                 
-                <div className={`space-y-3.5 border-t pt-6 text-xs ${isDarkMode ? "border-white/5 text-slate-350" : "border-slate-100 text-slate-700"}`}>
+                <div className={`space-y-3.5 border-t pt-6 text-xs ${isDarkMode ? "border-white/5 text-slate-355" : "border-slate-100 text-slate-700"}`}>
                   <div className="flex items-center gap-2">
                     <Check className="w-4 h-4 text-gold-500 shrink-0" />
                     <span>Up to 15 Compliant Invoices / mo</span>
@@ -718,67 +737,64 @@ export default function App() {
 
               <div className="pt-8">
                 <button 
-                  disabled={!isDarkMode}
                   onClick={scrollToPlayground} 
-                  className={`w-full font-bold py-3.5 rounded-xl text-xs tracking-wider uppercase transition-colors ${
-                    !isDarkMode 
-                      ? "bg-slate-100 text-slate-400 border border-slate-200 cursor-not-allowed"
-                      : isDarkMode 
-                        ? "bg-[#0d1a33] hover:bg-[#152747] text-white border border-white/5 cursor-pointer"
-                        : "bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-200 cursor-pointer"
+                  className={`w-full font-bold py-3.5 rounded-xl text-xs tracking-wider uppercase transition-colors cursor-pointer ${
+                    isDarkMode 
+                      ? "bg-[#0e1e3e] hover:bg-[#1c2e5e] text-white border border-white/5"
+                      : "bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-200"
                   }`}
                 >
-                  {!isDarkMode ? "Unavailable (Pro Only)" : "Choose Starter"}
+                  Choose Starter
                 </button>
               </div>
             </div>
 
-            {/* Tier 2: HIGHLIGHTED PRO CARDS */}
+             {/* Tier 2: HIGHLIGHTED PRO CARDS */}
             <div className={`p-8 rounded-2xl border-2 flex flex-col justify-between relative transition-all duration-300 ${
               isDarkMode 
-                ? "border-[#D4A64F] bg-[#0d1a33]/65 shadow-gold-heavy text-slate-100" 
-                : "border-[#D4A64F] bg-white shadow-lg shadow-gold-500/10 text-slate-850"
+                ? "border-[#F5C542] bg-[#0e1e3e]/75 shadow-gold-heavy text-slate-100" 
+                : "border-[#F5C542] bg-white shadow-[0_20px_50px_rgba(245,197,66,0.1)] text-slate-850 hover:shadow-[0_20px_60px_rgba(245,197,66,0.13)]"
             }`}>
               
-              <div className="absolute top-0 right-8 -translate-y-1/2 bg-gradient-to-r from-gold-600 to-[#D4A64F] text-[#050816] text-[9px] font-sans font-bold tracking-widest px-3.5 py-1 rounded-full uppercase">
-                {!isDarkMode ? "ONLY AVAILABLE LIGHT MODE PLAN" : "MOST POPULAR"}
+              <div className="absolute top-0 right-8 -translate-y-1/2 bg-gradient-to-r from-gold-600 to-[#F5C542] text-[#050B1A] text-[9px] font-sans font-bold tracking-widest px-3.5 py-1 rounded-full uppercase">
+                MOST POPULAR
               </div>
 
               <div>
                 <div className="flex justify-between items-center mb-1">
-                  <span className="text-[10px] font-sans text-[#D4A64F] tracking-wider uppercase font-bold">RECOMMENDED SCALE</span>
-                  <Sparkles className="w-4 h-4 text-[#D4A64F] animate-pulse" />
+                  <span className="text-[10px] font-sans text-[#F5C542] tracking-wider uppercase font-bold">RECOMMENDED SCALE</span>
+                  <Sparkles className="w-4 h-4 text-[#F5C542] animate-pulse" />
                 </div>
-                <h3 className={`font-display font-semibold tracking-wide text-lg mb-4 ${isDarkMode ? "text-white" : "text-slate-900"}`}>Pro Plan</h3>
+                <h3 className={`font-display font-semibold tracking-wide text-lg mb-4 ${isDarkMode ? "text-white" : "text-slate-900"}`}>Pro (Recommended)</h3>
                 <div className="mb-6">
-                  <span className="text-4xl font-display font-bold text-[#F3C76B]">$49</span>
+                  <span className="text-4xl font-display font-bold text-[#F5C542]">$49</span>
                   <span className="text-slate-500 text-xs font-sans"> / month</span>
                 </div>
-                <p className={`text-xs mb-6 leading-relaxed ${isDarkMode ? "text-slate-350" : "text-slate-600"}`}>Ideal model for growing agencies, consulting firms, and active startups requiring pro tool compliance.</p>
+                <p className={`text-xs mb-6 leading-relaxed ${isDarkMode ? "text-slate-350" : "text-slate-650"}`}>Ideal model for growing agencies, consulting firms, and active startups requiring pro tool compliance.</p>
                 
                 <div className={`space-y-3.5 border-t pt-6 text-xs ${isDarkMode ? "border-white/5 text-slate-300" : "border-slate-150 text-slate-700"}`}>
                   <div className="flex items-center gap-2 font-semibold">
-                    <Check className="w-4 h-4 text-[#F3C76B] shrink-0" />
+                    <Check className="w-4 h-4 text-[#F5C542] shrink-0" />
                     <span>Unlimited AI Invoice Generation</span>
                   </div>
                   <div className="flex items-center gap-2 font-semibold">
-                    <Check className="w-4 h-4 text-[#F3C76B] shrink-0" />
+                    <Check className="w-4 h-4 text-[#F5C542] shrink-0" />
                     <span>Active VAT Compliance Articles</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-[#F3C76B] shrink-0" />
+                    <Check className="w-4 h-4 text-[#F5C542] shrink-0" />
                     <span>Dynamic Analytics & Charts</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-[#F3C76B] shrink-0" />
+                    <Check className="w-4 h-4 text-[#F5C542] shrink-0" />
                     <span>Direct Account Remittance Details</span>
                   </div>
                 </div>
               </div>
 
               <div className="pt-8">
-                <button onClick={scrollToPlayground} className="w-full bg-gradient-to-r from-[#D4A64F] to-[#C2953E] hover:brightness-110 text-[#050816] font-bold py-3.5 rounded-xl text-xs tracking-wider uppercase transition-all shadow-md hover:scale-[1.01] cursor-pointer">
-                  Choose Pro Ledger
+                <button onClick={scrollToPlayground} className="w-full bg-gradient-to-r from-[#F5C542] to-[#E4B22B] hover:brightness-110 text-[#050B1A] font-bold py-3.5 rounded-xl text-xs tracking-wider uppercase transition-all shadow-md hover:scale-[1.01] cursor-pointer shadow-[#F5C542]/20">
+                  Choose Pro
                 </button>
               </div>
             </div>
@@ -786,17 +802,12 @@ export default function App() {
             {/* Tier 3 */}
             <div className={`p-8 rounded-2xl border flex flex-col justify-between transition-all duration-300 relative overflow-hidden ${
               isDarkMode 
-                ? "border-white/5 bg-[#081120]/40 backdrop-blur-md hover:border-[#F3C76B]/30 hover:bg-[#081120]/60" 
-                : "border-slate-200 bg-white shadow-sm hover:shadow-md hover:border-[#D4A64F]/50"
-            } ${!isDarkMode ? "opacity-60 saturate-[40%] bg-slate-50/50" : ""}`}>
-              {!isDarkMode && (
-                <div className="absolute top-4 right-4 bg-slate-200/50 text-slate-500 text-[8px] font-sans font-bold tracking-widest px-2.5 py-1 rounded">
-                  UNAVAILABLE IN LIGHT MODE
-                </div>
-              )}
+                ? "border-white/5 bg-[#0a142c]/40 backdrop-blur-md hover:border-[#F5C542]/30 hover:bg-[#0a142c]/65" 
+                : "border-slate-200 bg-white shadow-[0_8px_30px_rgb(0,0,0,0.015)] hover:shadow-[0_20px_50px_rgba(245,197,66,0.06)] hover:border-[#F5C542]/35"
+            }`}>
               <div>
-                <span className="text-[10px] font-sans text-slate-500 tracking-wider block mb-1">ENTERPRISE SCALE</span>
-                <h3 className={`font-display font-semibold tracking-wide text-lg mb-4 ${isDarkMode ? "text-white" : "text-slate-900"}`}>Enterprise</h3>
+                <span className="text-[10px] font-sans text-slate-500 tracking-wider block mb-1">BUSINESS SCALE</span>
+                <h3 className={`font-display font-semibold tracking-wide text-lg mb-4 ${isDarkMode ? "text-white" : "text-slate-900"}`}>Business</h3>
                 <div className="mb-6">
                   <span className={`text-4xl font-display font-bold ${isDarkMode ? "text-white" : "text-slate-950"}`}>$149</span>
                   <span className="text-slate-500 text-xs font-sans"> / month</span>
@@ -805,19 +816,19 @@ export default function App() {
                 
                 <div className={`space-y-3.5 border-t pt-6 text-xs ${isDarkMode ? "border-white/5 text-slate-355" : "border-slate-100 text-slate-700"}`}>
                   <div className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-gold-500 shrink-0" />
+                    <Check className="w-4 h-4 text-[#F5C542] shrink-0" />
                     <span>Custom Brand Monogram Uploads</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-gold-500 shrink-0" />
+                    <Check className="w-4 h-4 text-[#F5C542] shrink-0" />
                     <span>Multi-Entity Treasury Logins</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-gold-500 shrink-0" />
+                    <Check className="w-4 h-4 text-[#F5C542] shrink-0" />
                     <span>Dedicated Compliance Auditor</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-gold-500 shrink-0" />
+                    <Check className="w-4 h-4 text-[#F5C542] shrink-0" />
                     <span>API Webhook Integrations</span>
                   </div>
                 </div>
@@ -825,17 +836,14 @@ export default function App() {
 
               <div className="pt-8">
                 <button 
-                  disabled={!isDarkMode}
                   onClick={scrollToPlayground} 
                   className={`w-full font-bold py-3.5 rounded-xl text-xs tracking-wider uppercase transition-colors cursor-pointer ${
-                    !isDarkMode 
-                      ? "bg-slate-100 text-slate-400 border border-slate-200 cursor-not-allowed"
-                      : isDarkMode 
-                        ? "bg-[#0d1a33] hover:bg-[#152747] text-white border border-white/5"
-                        : "bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-200"
+                    isDarkMode 
+                      ? "bg-[#0d1a33] hover:bg-[#152747] text-white border border-white/5"
+                      : "bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-200"
                   }`}
                 >
-                  {!isDarkMode ? "Unavailable (Pro Only)" : "Contact Treasury"}
+                  Choose Business
                 </button>
               </div>
             </div>
@@ -903,11 +911,11 @@ export default function App() {
           
           <div className={`max-w-4xl mx-auto px-6 py-20 text-center space-y-8 relative z-10 border rounded-3xl transition-all duration-300 ${
             isDarkMode 
-              ? "bg-[#081120]/45 border-white/5" 
+              ? "bg-[#0a142c]/45 border-white/5" 
               : "bg-white border-slate-200 shadow-xl"
           }`}>
             <h2 className={`font-display font-bold text-3xl sm:text-5xl tracking-tight max-w-2xl mx-auto leading-tight transition-colors duration-300 ${
-              isDarkMode ? "text-white" : "text-[#050816]"
+              isDarkMode ? "text-white" : "text-[#050B1A]"
             }`}>
               Ready to Upgrade to <br />
               <span className="text-gold-gradient font-bold">Autonomous Invoicing?</span>
@@ -921,7 +929,7 @@ export default function App() {
             <div className="pt-4">
               <button 
                 onClick={scrollToPlayground}
-                className="bg-gradient-to-r from-[#D4A64F] to-[#C2953E] hover:brightness-110 text-[#050816] font-bold text-xs tracking-wider uppercase px-10 py-5 rounded-xl transition-all hover:scale-[1.02] shadow-lg shadow-[#D4A64F]/15 inline-flex items-center gap-2 cursor-pointer"
+                className="bg-gradient-to-r from-[#F5C542] to-[#E4B22B] hover:brightness-110 text-[#050B1A] font-bold text-xs tracking-wider uppercase px-10 py-5 rounded-xl transition-all hover:scale-[1.02] shadow-lg shadow-[#F5C542]/20 inline-flex items-center gap-2 cursor-pointer"
               >
                 Synthesize Invoices Now
                 <ArrowRight className="w-4 h-4 ml-1" />
@@ -1046,7 +1054,7 @@ export default function App() {
                   <button 
                     type="submit"
                     disabled={isSubmittingContact}
-                    className="w-full mt-4 bg-gradient-to-r from-[#D4A64F] to-[#C2953E] hover:brightness-110 disabled:from-slate-700 disabled:to-slate-800 text-[#050816] font-bold text-xs tracking-wider uppercase py-4 rounded-xl transition-all shadow-md active:scale-[0.98] cursor-pointer flex items-center justify-center gap-2"
+                    className="w-full mt-4 bg-gradient-to-r from-[#F5C542] to-[#E4B22B] hover:brightness-110 disabled:from-slate-700 disabled:to-slate-800 text-[#050B1A] font-bold text-xs tracking-wider uppercase py-4 rounded-xl transition-all shadow-md active:scale-[0.98] cursor-pointer flex items-center justify-center gap-2"
                   >
                     {isSubmittingContact ? (
                       <>Authenticating Secure Dispatch...</>
@@ -1185,59 +1193,6 @@ export default function App() {
         </footer>
 
       </main>
-
-      {/* 8. CINEMATIC HIGH-RES PORTFOLIO POSTER LIGHTBOX */}
-      {isPosterExpanded && (
-        <div 
-          className="fixed inset-0 z-50 bg-black/95 backdrop-blur-xl flex flex-col items-center justify-center p-4 sm:p-8 md:p-12 animate-fadeIn"
-          onClick={() => setIsPosterExpanded(false)}
-        >
-          {/* Top navigation ribbon styled like a luxury gallery interface */}
-          <div className="w-full max-w-5xl flex items-center justify-between mb-4 text-white">
-            <div className="flex items-center gap-2">
-              <Sparkles className="w-4 h-4 text-gold-400 animate-pulse" />
-              <span className="font-sans text-xs tracking-[0.2em] font-semibold text-[#D4A64F]">
-                FAKTURAS // HIGH-RES CINEMATIC STUDIO POSTER
-              </span>
-            </div>
-            <button 
-              onClick={() => setIsPosterExpanded(false)}
-              className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 flex items-center justify-center text-white font-bold transition-all hover:scale-105 cursor-pointer"
-              title="Close gallery"
-            >
-              <X className="w-5 h-5" />
-            </button>
-          </div>
-
-          {/* Majestic Center Frame mapping exactly to the poster showcase style */}
-          <div 
-            className="w-full max-w-5xl bg-[#07122a]/40 border border-white/10 p-1.5 sm:p-2.5 rounded-[2.5rem] shadow-2xl relative overflow-hidden"
-            onClick={(e) => e.stopPropagation()} 
-          >
-            {/* Fine drafting line overlay grid mapping mimicking the template poster aspect */}
-            <div className="absolute inset-0 border-[0.75rem] border-transparent pointer-events-none opacity-20">
-              <div className="w-full h-full border border-white/5"></div>
-            </div>
-
-            {/* Glowing accent lights */}
-            <div className="absolute -top-40 -left-40 w-96 h-96 bg-gold-400/10 rounded-full blur-3xl pointer-events-none"></div>
-            <div className="absolute -bottom-40 -right-40 w-96 h-96 bg-gold-400/5 rounded-full blur-3xl pointer-events-none"></div>
-
-            {/* Pristine high-fidelity full screen image rendering */}
-            <img 
-              src={heroScene} 
-              alt="Fakturas Premium Cinematic Poster Full Resolution" 
-              className="w-full h-auto rounded-[1.8rem] border border-white/5 shadow-2xl object-contain max-h-[80vh] select-none"
-              referrerPolicy="no-referrer"
-            />
-          </div>
-
-          {/* Simple exit instructions */}
-          <p className="text-[10px] font-mono tracking-widest text-slate-500 uppercase mt-4 text-center max-sm:hidden">
-            CLICK ANYWHERE OUTSIDE TO EXIT THE HIGH-RES GALLERY VIEW
-          </p>
-        </div>
-      )}
 
     </div>
   );

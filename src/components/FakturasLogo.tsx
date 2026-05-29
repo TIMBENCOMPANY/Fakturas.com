@@ -60,14 +60,14 @@ export function FakturasLogo({ className = "", size = "md" }: LogoProps) {
 
 export function FakturasTextLogo({ isDarkMode = true }: { isDarkMode?: boolean }) {
   return (
-    <div className="flex items-center gap-3 select-none">
-      <FakturasLogo size="sm" className="transition-transform duration-500 hover:rotate-12 cursor-pointer" />
+    <div className="flex items-center gap-3.5 select-none">
+      <FakturasLogo size="md" className="transition-transform duration-500 hover:rotate-12 cursor-pointer scale-105" />
       <div className="flex flex-col text-left leading-none">
-        <span className={`tracking-[0.25em] text-sm font-semibold transition-colors duration-300 ${isDarkMode ? 'text-white' : 'text-[#050816]'}`}>
+        <span className={`tracking-[0.25em] text-base font-extrabold transition-colors duration-300 ${isDarkMode ? 'text-white' : 'text-[#050B1A]'}`}>
           FAKTURAS
         </span>
-        <span className="text-[7.5px] font-mono tracking-[0.45em] text-[#D4A64F] font-semibold uppercase mt-1">
-          STUDIO LEDGERS
+        <span className="text-[7.5px] font-mono tracking-[0.15em] text-[#F5C542] font-semibold uppercase mt-1">
+          Smart Invoicing Platform
         </span>
       </div>
     </div>

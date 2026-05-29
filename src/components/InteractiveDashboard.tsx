@@ -63,8 +63,8 @@ const INITIAL_INVOICES: Invoice[] = [
     discountRate: 5,
     status: "paid",
     items: [
-      { description: "Smart Contract Safety Audits & Liquidity Protocol Analysis", quantity: 30, unitPrice: 250 },
-      { description: "Cryptographic Subgraph Ledger Integration Services", quantity: 1, unitPrice: 4000 }
+      { description: "Cloud Infrastructure Security Audit & Compliance Assessment", quantity: 30, unitPrice: 250 },
+      { description: "Enterprise API Integration & Custom Financial Webhooks", quantity: 1, unitPrice: 4000 }
     ],
     notes: " Remitted via Coinbase USD Cash Account. Reference code: TX-900821."
   },
@@ -452,9 +452,9 @@ export default function InteractiveDashboard({ onAiStart, syntheticInvoice, rese
         }`}>
           <div className="flex flex-col max-lg:flex-row items-center gap-5 w-full max-lg:justify-around">
             {[
-              { id: 'invoices', icon: FileText, label: "Ledgers" },
-              { id: 'ai', icon: Sparkles, colorClass: "text-gold-550 animate-pulse", label: "Synth AI" },
-              { id: 'settings', icon: Settings, label: "Config" }
+              { id: 'invoices', icon: FileText, label: "Invoices" },
+              { id: 'ai', icon: Sparkles, colorClass: "text-gold-550 animate-pulse", label: "AI Builder" },
+              { id: 'settings', icon: Settings, label: "Settings" }
             ].map((tab) => {
               const Icon = tab.icon;
               const isActive = activeTab === tab.id;
@@ -824,7 +824,7 @@ export default function InteractiveDashboard({ onAiStart, syntheticInvoice, rese
                           </button>
                           <button 
                             onClick={handleDownloadPDF}
-                            className="bg-[#D4A64F] hover:bg-[#C2953E] text-[#050816] font-bold px-3 py-1.5 rounded flex items-center gap-1 transition-colors shadow-sm"
+                            className="bg-[#F5C542] hover:bg-[#E4B22B] text-[#050B1A] font-bold px-3 py-1.5 rounded flex items-center gap-1 transition-colors shadow-sm"
                           >
                             <Download className="w-3 h-3" />
                             PDF Invoice
@@ -969,11 +969,11 @@ export default function InteractiveDashboard({ onAiStart, syntheticInvoice, rese
                   <div className="flex justify-between items-center">
                     <div className="flex items-center gap-2 text-left">
                       <div className="w-1.5 h-1.5 rounded-full bg-gold-400 animate-ping"></div>
-                      <h3 className={`font-display font-bold text-sm ${isDarkMode ? "text-white" : "text-[#07122A]"}`}>Fakturas Neural Invoicing Core</h3>
+                      <h3 className={`font-display font-bold text-sm ${isDarkMode ? "text-white" : "text-[#07122A]"}`}>Fakturas AI Invoice Generator</h3>
                     </div>
-                    <span className="text-[10px] text-slate-500 font-mono">MODEL CORE: gemini-3.5-flash-latest</span>
+                    <span className="text-[10px] text-slate-500 font-mono">POWERED BY GEMINI AI</span>
                   </div>
-                  <p className="text-xs text-slate-500 mt-1 text-left">Provide a prompt structure below and direct artificial nodes to generate complete accounting documents automatically.</p>
+                  <p className="text-xs text-slate-500 mt-1 text-left">State your invoice details in natural language to compile structured, tax-compliant documents instantly.</p>
                 </div>
 
                 {/* AI Assistant Simulated Terminal Conversation log */}
@@ -983,7 +983,7 @@ export default function InteractiveDashboard({ onAiStart, syntheticInvoice, rese
                     <div className={`border p-3 rounded-lg max-w-[80%] text-xs leading-relaxed font-mono text-left ${
                       isDarkMode ? "bg-royal-900/40 border-slate-800 text-slate-300" : "bg-slate-50 border-slate-200 text-slate-705 shadow-sm"
                     }`}>
-                      <span className="text-gold-650 font-bold">SYSTEM ACTIVE</span> Welcome to Fakturas Neural Ledger module. State the transactional facts directly, such as: 
+                      <span className="text-gold-650 font-bold">SYSTEM ACTIVE</span> Welcome to Fakturas AI Invoicing. State the transactional facts directly, such as: 
                       <span className="font-semibold block mt-1"> "Invoice Dropbox for 40 hours of core backup security audit consultation at $210/hour plus 15% VAT."</span>
                     </div>
                   </div>
@@ -1149,7 +1149,7 @@ export default function InteractiveDashboard({ onAiStart, syntheticInvoice, rese
                 <div className="text-right">
                   <button 
                     onClick={() => triggerToast("System settings synced globally.")}
-                    className="bg-gold-500 hover:bg-gold-600 text-[#050816] font-bold px-4 py-2 rounded text-xs select-none cursor-pointer shadow-sm"
+                    className="bg-gold-500 hover:bg-gold-600 text-[#050B1A] font-bold px-4 py-2 rounded text-xs select-none cursor-pointer shadow-sm"
                   >
                     Save Options
                   </button>
