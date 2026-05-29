@@ -196,6 +196,11 @@ export default function TemplatesSection({ isDarkMode }: TemplatesSectionProps) 
             : "bg-[#FCFAF7] border-slate-200 shadow-xl"
         }`}>
           
+          {/* Sample Template Preview Label */}
+          <div className="absolute top-4 right-4 z-10 flex items-center gap-1.5 bg-[#F5C542]/10 border border-[#F5C542]/20 px-2.5 py-1 rounded text-[8px] font-mono tracking-widest text-[#F5C542] uppercase font-bold select-none">
+            Sample Template Preview
+          </div>
+          
           {/* Subtle design element overlay for different styles */}
           {selectedStyle === "Modern" && (
             <div className="absolute top-0 left-0 right-0 h-2 bg-[#F5C542]"></div>

@@ -4,15 +4,17 @@ import {
   Download, ChevronRight, HelpCircle, Check, ArrowRight, 
   Play, Users, Star, ArrowUpRight, CheckSquare, MessageCircle, 
   Globe, Briefcase, Menu, X, Layers, CreditCard, Lock, Percent,
-  Sun, Moon, Send, MapPin, Mail
+  Sun, Moon, Send, MapPin, Mail, ChevronDown
 } from "lucide-react";
-import { Analytics } from "@vercel/analytics/react";
 import InteractiveDashboard from "./components/InteractiveDashboard";
 import DashboardMockup from "./components/DashboardMockup";
 import AILoader from "./components/AILoader";
 import TemplatesSection from "./components/TemplatesSection";
 import { FakturasLogo, FakturasTextLogo } from "./components/FakturasLogo";
 import { Invoice } from "./types";
+import AuthScreens from "./components/AuthScreens";
+import DashboardView from "./components/DashboardView";
+import { supabase, isSupabaseConfigured } from "./lib/supabase";
 // @ts-ignore
 import heroScene from "./assets/images/fakturas_new_hero_1779476323472.png";
 
@@ -86,12 +88,106 @@ function parseInvoiceHeuristic(prompt: string): Invoice {
 }
 
 export default function App() {
+  const [route, setRoute] = useState<"landing" | "login" | "signup" | "forgot-password" | "dashboard">("landing");
+  const [user, setUser] = useState<any>(null);
+  const [authLoading, setAuthLoading] = useState(true);
+  const [headerDropdownOpen, setHeaderDropdownOpen] = useState(false);
+
   const [heroPrompt, setHeroPrompt] = useState("");
   const [aiPromptText, setAiPromptText] = useState("");
   const [isAiLoading, setIsAiLoading] = useState(false);
   const [syntheticInvoice, setSyntheticInvoice] = useState<Invoice | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(true);
+
+  // Parse path and hash
+  const parseCurrentRoute = (): typeof route => {
+    const hash = window.location.hash;
+    const path = window.location.pathname;
+    
+    if (hash === "#/login" || hash === "#login" || path === "/login") return "login";
+    if (hash === "#/signup" || hash === "#signup" || path === "/signup") return "signup";
+    if (hash === "#/forgot-password" || hash === "#forgot-password" || path === "/forgot-password") return "forgot-password";
+    if (hash === "#/dashboard" || hash === "#dashboard" || path === "/dashboard") return "dashboard";
+    
+    return "landing";
+  };
+
+  const navigateTo = (newRoute: typeof route) => {
+    setRoute(newRoute);
+    if (newRoute === "landing") {
+      window.history.pushState(null, "", "/");
+    } else {
+      window.history.pushState(null, "", `#/${newRoute}`);
+    }
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  // Auth synchronization effect
+  useEffect(() => {
+    if (!isSupabaseConfigured) {
+      setAuthLoading(false);
+      const cached = localStorage.getItem("fakturas_sandbox_user");
+      if (cached) {
+        setUser(JSON.parse(cached));
+      }
+      return;
+    }
+
+    supabase!.auth.getSession().then(({ data: { session } }) => {
+      setUser(session?.user ?? null);
+      setAuthLoading(false);
+    });
+
+    const { data: { subscription } } = supabase!.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+      setAuthLoading(false);
+    });
+
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, []);
+
+  // Listen to hash / history changes
+  useEffect(() => {
+    const handleLocationChange = () => {
+      const parsed = parseCurrentRoute();
+      setRoute(parsed);
+    };
+
+    window.addEventListener("hashchange", handleLocationChange);
+    window.addEventListener("popstate", handleLocationChange);
+    
+    const initialRoute = parseCurrentRoute();
+    setRoute(initialRoute);
+
+    return () => {
+      window.removeEventListener("hashchange", handleLocationChange);
+      window.removeEventListener("popstate", handleLocationChange);
+    };
+  }, []);
+
+  // Route Guardian
+  useEffect(() => {
+    if (!authLoading) {
+      if (route === "dashboard" && !user) {
+        navigateTo("login");
+      } else if ((route === "login" || route === "signup" || route === "forgot-password") && user) {
+        navigateTo("dashboard");
+      }
+    }
+  }, [route, user, authLoading]);
+
+  const handleLogout = async () => {
+    if (isSupabaseConfigured) {
+      await supabase!.auth.signOut();
+    } else {
+      localStorage.removeItem("fakturas_sandbox_user");
+    }
+    setUser(null);
+    navigateTo("landing");
+  };
 
   // Contact Form State
   const [contactName, setContactName] = useState("");
@@ -182,6 +278,44 @@ export default function App() {
     setHeroPrompt("");
   };
 
+  if (authLoading) {
+    return (
+      <div className="min-h-screen bg-[#050B1A] flex flex-col items-center justify-center font-sans">
+        <div className="flex flex-col items-center gap-4">
+          <div className="w-9 h-9 border-2 border-[#F5C542] border-t-transparent rounded-full animate-spin"></div>
+          <p className="text-xs font-mono tracking-[0.2em] text-slate-400 uppercase font-semibold">Synchronizing Secure Session...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (route === "login" || route === "signup" || route === "forgot-password") {
+    return (
+      <AuthScreens 
+        currentView={route} 
+        setView={navigateTo} 
+        onAuthSuccess={(u) => {
+          setUser(u);
+          if (!isSupabaseConfigured) {
+            localStorage.setItem("fakturas_sandbox_user", JSON.stringify(u));
+          }
+        }}
+        isDarkMode={isDarkMode}
+        onToggleDarkMode={() => setIsDarkMode(!isDarkMode)}
+      />
+    );
+  }
+
+  if (route === "dashboard") {
+    return (
+      <DashboardView 
+        user={user} 
+        onLogout={handleLogout} 
+        isDarkMode={isDarkMode} 
+      />
+    );
+  }
+
   return (
     <div className={`min-h-screen transition-colors duration-500 overflow-hidden relative ${
       isDarkMode 
@@ -263,20 +397,60 @@ export default function App() {
               {isDarkMode ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
             </button>
 
-            <button 
-              onClick={scrollToPlayground}
-              className={`text-sm font-medium transition-colors cursor-pointer ${
-                isDarkMode ? "hover:text-white text-slate-400" : "hover:text-slate-905 text-slate-600"
-              }`}
-            >
-              Log in
-            </button>
-            <button 
-              onClick={scrollToPlayground}
-              className="px-4.5 py-2 bg-[#F5C542] text-[#050B1A] rounded-xl text-xs font-bold tracking-wide transition-all hover:brightness-110 shadow-lg shadow-[#F5C542]/15 active:scale-[0.98] cursor-pointer"
-            >
-              Start free
-            </button>
+            {user ? (
+              <div className="flex items-center gap-4">
+                <button
+                  onClick={() => navigateTo("dashboard")}
+                  className="px-4.5 py-2 bg-[#F5C542] text-[#050B1A] rounded-xl text-xs font-bold tracking-wide transition-all hover:brightness-110 shadow-lg shadow-[#F5C542]/15 active:scale-[0.98] cursor-pointer select-none"
+                >
+                  Dashboard
+                </button>
+                <div className="relative">
+                  <button
+                    onClick={() => setHeaderDropdownOpen(!headerDropdownOpen)}
+                    className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-[#0a142c]/65 border border-white/5 text-slate-300 hover:text-white tracking-wide font-medium transition-all select-none cursor-pointer hover:border-[#F5C542]/20"
+                  >
+                    <div className="w-5 h-5 rounded-full bg-[#F5C542]/10 border border-[#F5C542]/25 text-[#F5C542] flex items-center justify-center font-bold font-mono text-[9px]">
+                      {user?.user_metadata?.full_name?.substring(0, 2).toUpperCase() || user?.email?.substring(0, 2).toUpperCase() || "US"}
+                    </div>
+                    <ChevronDown className="w-3.5 h-3.5 text-slate-450" />
+                  </button>
+                  {headerDropdownOpen && (
+                    <div className="absolute right-0 mt-2.5 w-48 rounded-xl bg-[#0a142c]/95 border border-white/5 py-2 shadow-2xl backdrop-blur-md z-50">
+                      <button
+                        onClick={() => { setHeaderDropdownOpen(false); navigateTo("dashboard"); }}
+                        className="w-full text-left px-4 py-2 text-xs text-slate-300 hover:text-[#F5C542] hover:bg-white/[0.02] transition-all flex items-center gap-2 cursor-pointer"
+                      >
+                        Profile & Settings
+                      </button>
+                      <button
+                        onClick={() => { setHeaderDropdownOpen(false); handleLogout(); }}
+                        className="w-full text-left px-4 py-2 text-xs text-red-400 font-semibold hover:bg-red-500/5 transition-all flex items-center gap-2 cursor-pointer"
+                      >
+                        Sign out secure
+                      </button>
+                    </div>
+                  )}
+                </div>
+              </div>
+            ) : (
+              <>
+                <button 
+                  onClick={() => navigateTo("login")}
+                  className={`text-sm font-medium transition-colors cursor-pointer ${
+                    isDarkMode ? "hover:text-white text-slate-400" : "hover:text-slate-905 text-slate-600"
+                  }`}
+                >
+                  Log in
+                </button>
+                <button 
+                  onClick={() => navigateTo("signup")}
+                  className="px-4.5 py-2 bg-[#F5C542] text-[#050B1A] rounded-xl text-xs font-bold tracking-wide transition-all hover:brightness-110 shadow-lg shadow-[#F5C542]/15 active:scale-[0.98] cursor-pointer"
+                >
+                  Start free
+                </button>
+              </>
+            )}
           </div>
 
           {/* Mobile navigation or toggle */}
@@ -308,19 +482,26 @@ export default function App() {
             <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-1.5 py-1 text-[10px] font-sans font-bold uppercase tracking-wider">
               <a href="#features" onClick={() => setMobileMenuOpen(false)} className={`hover:text-[#F5C542] py-0.5 transition-colors ${isDarkMode ? "text-slate-300" : "text-slate-700"}`}>FEATURES</a>
               <a href="#dashboard-play" onClick={() => setMobileMenuOpen(false)} className="text-[#F5C542] hover:brightness-110 py-0.5 transition-colors">INVOICE BUILDER</a>
-              <a href="#pricing" onClick={() => setMobileMenuOpen(false)} className={`hover:text-[#F5C542] py-0.5 transition-colors ${isDarkMode ? "text-slate-300" : "text-slate-700"}`}>PRICING</a>
-              <a href="#contact" onClick={() => setMobileMenuOpen(false)} className={`hover:text-[#F5C542] py-0.5 transition-colors ${isDarkMode ? "text-slate-300" : "text-slate-700"}`}>CONTACT</a>
+              {user ? (
+                <button onClick={() => { setMobileMenuOpen(false); navigateTo("dashboard"); }} className="text-[#F5C542] hover:brightness-110 py-0.5 transition-colors uppercase font-bold text-[10px] tracking-wider">DASHBOARD</button>
+              ) : (
+                <>
+                  <button onClick={() => { setMobileMenuOpen(false); navigateTo("login"); }} className={`hover:text-[#F5C542] py-0.5 transition-colors ${isDarkMode ? "text-slate-300" : "text-slate-700"} uppercase font-bold text-[10px] tracking-wider`}>LOG IN</button>
+                  <button onClick={() => { setMobileMenuOpen(false); navigateTo("signup"); }} className="text-[#F5C542] hover:brightness-110 py-0.5 transition-colors uppercase font-bold text-[10px] tracking-wider">SIGN UP</button>
+                </>
+              )}
             </div>
             <div className="pt-1.5 pb-1 flex justify-center">
               <button 
-                onClick={() => { setMobileMenuOpen(false); scrollToPlayground(); }}
+                onClick={() => { setMobileMenuOpen(false); user ? navigateTo("dashboard") : navigateTo("signup"); }}
                 className="bg-[#F5C542] hover:bg-[#ffeb99] text-[#050B1A] font-extrabold tracking-[0.12em] py-2 px-5 rounded-[12px] text-[9px] uppercase shadow-[0_4px_12px_rgba(245,197,66,0.2)] active:scale-95 transition-all flex items-center justify-center gap-1.5 cursor-pointer border border-[#F5C542]/20"
               >
-                LAUNCH PLATFORM
+                {user ? "ACCESS LEDGER" : "START FREE"}
               </button>
             </div>
           </div>
         )}
+
       </header>
 
       {/* MAIN LAYOUT WRAPPERS */}
@@ -364,12 +545,13 @@ export default function App() {
               {/* Luxury CTA buttons */}
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full max-w-[480px]">
                 <button 
-                  onClick={scrollToPlayground}
+                  onClick={() => user ? navigateTo("dashboard") : navigateTo("signup")}
                   className="bg-[#F5C542] hover:bg-[#ffeb99] text-[#050B1A] font-semibold text-xs tracking-[0.2em] uppercase py-4.5 px-8 rounded-xl transition-all duration-300 hover:scale-[1.015] active:scale-[0.985] shadow-[0_12px_45px_rgba(245,197,66,0.35)] flex items-center justify-center gap-2 cursor-pointer border border-[#F5C542]/20"
                 >
-                  Start Free
+                  {user ? "Dashboard" : "Start Free"}
                   <ArrowRight className="w-4 h-4 shrink-0" />
                 </button>
+
                 <button 
                   onClick={scrollToPlayground}
                   className={`border border-[#F5C542]/50 hover:border-[#F5C542] font-semibold text-xs tracking-[0.2em] uppercase py-4.5 px-8 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer ${
@@ -1200,7 +1382,6 @@ export default function App() {
 
       </main>
 
-      <Analytics />
     </div>
   );
 }
