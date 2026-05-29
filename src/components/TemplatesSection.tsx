@@ -51,7 +51,7 @@ const TEMPLATES: Record<TemplateStyle, TemplateData> = {
     style: "Freelancer",
     tagline: "Friendly yet highly polished layout optimized for creative professionals",
     icon: User,
-    colorName: "Warm Amber Accent",
+    colorName: "Luxury Gold Accent",
     sampleClient: "Design Within Reach",
     sampleProject: "Visual Rebranding Campaign",
     sampleItems: [
@@ -147,8 +147,8 @@ export default function TemplatesSection({ isDarkMode }: TemplatesSectionProps) 
                   className={`p-4.5 rounded-2xl border transition-all duration-300 flex items-center justify-between group cursor-pointer text-left ${
                     isSelected
                       ? isDarkMode
-                        ? "bg-[#D4AF37]/10 border-[#F5C542] text-white shadow-lg shadow-[#F5C542]/5"
-                        : "bg-amber-500/10 border-[#b59029] text-slate-900 shadow-md"
+                        ? "bg-[#F5C542]/10 border-[#F5C542] text-white shadow-lg shadow-[#F5C542]/5"
+                        : "bg-[#F5C542]/10 border-[#F5C542] text-slate-900 shadow-md"
                       : isDarkMode
                         ? "bg-[#091225]/40 border-white/5 text-slate-400 hover:border-white/10 hover:bg-[#0a142c]/60"
                         : "bg-white border-slate-200 text-slate-650 hover:bg-slate-50 hover:border-slate-300"
@@ -159,7 +159,7 @@ export default function TemplatesSection({ isDarkMode }: TemplatesSectionProps) 
                       isSelected
                         ? isDarkMode
                           ? "bg-[#F5C542]/20 border-[#F5C542]/40 text-[#F5C542]"
-                          : "bg-amber-500/10 border-amber-500/30 text-amber-900"
+                          : "bg-[#F5C542]/20 border-[#F5C542]/40 text-[#ffc83b]"
                         : isDarkMode
                           ? "bg-white/[0.02] border-white/5 text-slate-500 group-hover:text-slate-300"
                           : "bg-slate-50 border-slate-200 text-slate-600 group-hover:text-slate-900"
@@ -204,7 +204,7 @@ export default function TemplatesSection({ isDarkMode }: TemplatesSectionProps) 
             <div className="absolute top-0 left-0 right-0 h-4 border-b border-double border-slate-400 dark:border-white/10"></div>
           )}
           {selectedStyle === "Freelancer" && (
-            <div className="absolute top-6 left-6 w-1 hover:scale-x-150 h-10 bg-amber-500 rounded"></div>
+            <div className="absolute top-6 left-6 w-1 hover:scale-x-150 h-10 bg-[#F5C542] rounded"></div>
           )}
           {selectedStyle === "Agency" && (
             <div className="absolute top-0 left-0 right-0 h-1.5 bg-slate-900 dark:bg-white"></div>
@@ -219,7 +219,7 @@ export default function TemplatesSection({ isDarkMode }: TemplatesSectionProps) 
                   <div className={`w-6 h-6 rounded-lg flex items-center justify-center font-bold text-xs ${
                     selectedStyle === "Modern" ? "bg-[#F5C542] text-[#050B1A]" :
                     selectedStyle === "Corporate" ? "bg-slate-900 dark:bg-slate-300 text-white dark:text-black" :
-                    selectedStyle === "Freelancer" ? "bg-amber-500 text-white" :
+                    selectedStyle === "Freelancer" ? "bg-[#F5C542] text-[#050B1A]" :
                     selectedStyle === "Agency" ? "bg-slate-950 dark:bg-white text-white dark:text-black" :
                     "bg-transparent border border-slate-900 dark:border-white text-slate-900 dark:text-white"
                   }`}>F</div>
@@ -233,7 +233,7 @@ export default function TemplatesSection({ isDarkMode }: TemplatesSectionProps) 
                 <span className={`text-[10px] font-mono tracking-widest font-bold uppercase rounded px-2.5 py-1 ${
                   selectedStyle === "Modern" ? "bg-[#F5C542]/10 text-[#F5C542] border border-[#F5C542]/20" :
                   selectedStyle === "Corporate" ? "bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-slate-300 border border-slate-300/30" :
-                  selectedStyle === "Freelancer" ? "bg-amber-100 dark:bg-amber-500/10 text-amber-700 dark:text-amber-400" :
+                  selectedStyle === "Freelancer" ? "bg-[#F5C542]/10 text-[#F5C542] border border-[#F5C542]/20" :
                   selectedStyle === "Agency" ? "bg-slate-900 dark:bg-white text-white dark:text-black" :
                   "border border-slate-400 dark:border-slate-800 text-slate-500"
                 }`}>
@@ -302,7 +302,7 @@ export default function TemplatesSection({ isDarkMode }: TemplatesSectionProps) 
               <div className={`flex justify-between p-2 rounded-lg items-center ${
                 selectedStyle === "Modern" ? "bg-[#F5C542]/10 text-white border border-[#F5C542]/20 font-bold" :
                 selectedStyle === "Corporate" ? "bg-slate-100 dark:bg-white/[0.03] text-[#050B1A] dark:text-white border border-slate-300/30 font-extrabold" :
-                selectedStyle === "Freelancer" ? "bg-amber-500/10 text-amber-500 font-bold border border-amber-500/15" :
+                selectedStyle === "Freelancer" ? "bg-[#F5C542]/10 text-[#F5C542] font-bold border border-[#F5C542]/20" :
                 selectedStyle === "Agency" ? "bg-slate-900 dark:bg-white text-white dark:text-black font-extrabold" :
                 "border border-slate-900 dark:border-white text-slate-900 dark:text-white font-mono"
               }`}>

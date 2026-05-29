@@ -11,7 +11,7 @@ interface DashboardMockupProps {
 }
 
 export default function DashboardMockup({ isDarkMode }: DashboardMockupProps) {
-  const [activeTab, setActiveTab] = useState<"invoices" | "clients" | "payments" | "analytics">("analytics");
+  const [activeTab, setActiveTab] = useState<"invoices" | "clients" | "payments" | "analytics" | "taxes" | "timeline">("analytics");
   const [hoveredRow, setHoveredRow] = useState<number | null>(null);
 
   // Realistic billing data
@@ -179,13 +179,34 @@ export default function DashboardMockup({ isDarkMode }: DashboardMockupProps) {
 
             <div className="space-y-1 pt-2">
               <p className="text-[8.5px] font-mono tracking-widest text-slate-500 uppercase font-bold pl-2.5 mb-1.5">Tax & Compliance</p>
-              <div className={`p-2.5 rounded-xl border border-dashed flex flex-col gap-1.5 ${isDarkMode ? "border-white/5 bg-white/[0.02]" : "border-slate-200 bg-slate-50/50"}`}>
-                <div className="flex items-center gap-1 text-[9.5px] font-mono text-[#F5C542] font-semibold">
-                  <ShieldCheck className="w-3.5 h-3.5 shrink-0" />
-                  <span>VAT & Tax Ready</span>
-                </div>
-                <p className="text-[8.5px] text-slate-400 leading-normal">Automatic international tax calculations.</p>
-              </div>
+              
+              <button 
+                onClick={() => setActiveTab("taxes")}
+                className={`w-full flex items-center gap-2.5 px-2.5 py-2 rounded-xl text-left font-medium transition-all ${
+                  activeTab === "taxes"
+                    ? isDarkMode 
+                      ? "bg-[#F5C542]/10 text-[#F5C542]"
+                      : "bg-[#F5C542]/15 text-[#8a6503] font-semibold"
+                    : "text-slate-400 hover:text-slate-800 dark:hover:text-white"
+                }`}
+              >
+                <BadgePercent className="w-3.5 h-3.5" />
+                <span>VAT & Tax Reports</span>
+              </button>
+
+              <button 
+                onClick={() => setActiveTab("timeline")}
+                className={`w-full flex items-center gap-2.5 px-2.5 py-2 rounded-xl text-left font-medium transition-all ${
+                  activeTab === "timeline"
+                    ? isDarkMode 
+                      ? "bg-[#F5C542]/10 text-[#F5C542]"
+                      : "bg-[#F5C542]/15 text-[#8a6503] font-semibold"
+                    : "text-slate-400 hover:text-slate-800 dark:hover:text-white"
+                }`}
+              >
+                <Calendar className="w-3.5 h-3.5" />
+                <span>Activity Timeline</span>
+              </button>
             </div>
           </div>
 
@@ -223,7 +244,7 @@ export default function DashboardMockup({ isDarkMode }: DashboardMockupProps) {
                 </div>
                 
                 <div className={`p-4 rounded-2xl border border-[#F5C542]/20 ${isDarkMode ? "bg-[#F5C542]/5" : "bg-[#F5C542]/5 shadow-sm"}`}>
-                  <span className="text-[#a27b13] dark:text-[#F5C542] text-[9px] font-mono tracking-wider uppercase block">Paid Invoices</span>
+                  <span className="text-[#F5C542] text-[9px] font-mono tracking-wider uppercase block font-semibold">Paid Invoices</span>
                   <div className={`text-lg font-bold mt-1 tracking-tight ${isDarkMode ? "text-white" : "text-slate-900"}`}>$124,492.00</div>
                   <span className="text-emerald-500 font-mono text-[9px] font-semibold mt-1 inline-flex items-center gap-0.5">
                     ↑ 14.2%
@@ -308,7 +329,7 @@ export default function DashboardMockup({ isDarkMode }: DashboardMockupProps) {
                             : inv.status === "Pending"
                               ? isDarkMode
                                 ? "bg-[#F5C542]/10 text-[#F5C542] border border-[#F5C542]/20"
-                                : "bg-[#F5C542]/10 text-amber-700 border border-[#F5C542]/25"
+                                : "bg-[#F5C542]/10 text-[#F5C542] border border-[#F5C542]/25"
                               : "bg-red-500/10 text-red-500 border border-red-500/20"
                         }`}>
                           {inv.status}
@@ -408,6 +429,143 @@ export default function DashboardMockup({ isDarkMode }: DashboardMockupProps) {
               <div className={`p-3 rounded-xl flex items-center gap-2 justify-center border text-[10px] text-slate-400 ${isDarkMode ? "border-white/5 bg-white/[0.02]" : "border-slate-200 bg-slate-50/55"}`}>
                 <RefreshCw className="w-3.5 h-3.5 text-[#F5C542] animate-spin" style={{ animationDuration: "10s" }} />
                 <span>Synchronizing transaction feeds (Stripe, Apple Pay)...</span>
+              </div>
+            </div>
+          )}
+
+          {/* TAB 5: VAT & TAX REPORTS PREVIEW */}
+          {activeTab === "taxes" && (
+            <div className="space-y-4 animate-fadeIn text-left">
+              <div className="flex items-center justify-between flex-wrap gap-2">
+                <div>
+                  <h3 className={`text-base font-semibold tracking-tight ${isDarkMode ? "text-white" : "text-slate-900"}`}>VAT & Tax Compliance Reports</h3>
+                  <p className="text-slate-400 text-[10px] mt-0.5">Automated cross-border VAT auditing and unified digital filings.</p>
+                </div>
+                <button className="bg-[#F5C542] hover:bg-[#ffeb99] text-[#050B1A] px-2.5 py-1.5 rounded-lg flex items-center gap-1 text-[10px] font-bold tracking-wide transition-all shadow-md">
+                  <Download className="w-3.5 h-3.5" />
+                  <span>Export Tax Package</span>
+                </button>
+              </div>
+
+              {/* Tax Metrics */}
+              <div className="grid grid-cols-3 gap-3.5 max-sm:grid-cols-1">
+                <div className={`p-4 rounded-2xl border ${isDarkMode ? "bg-white/[0.02] border-white/5" : "bg-white border-slate-100 shadow-sm"}`}>
+                  <span className="text-slate-500 text-[9px] font-mono tracking-wider uppercase block">EU One-Stop-Shop (MOSS)</span>
+                  <div className={`text-base font-bold mt-1 tracking-tight ${isDarkMode ? "text-white" : "text-slate-900"}`}>€24,305.00 EUR</div>
+                  <span className="text-emerald-500 font-mono text-[9px] mt-1 inline-block font-semibold">✓ Ready to File</span>
+                </div>
+                
+                <div className={`p-4 rounded-2xl border ${isDarkMode ? "bg-white/[0.02] border-white/5" : "bg-white border-slate-100 shadow-sm"}`}>
+                  <span className="text-slate-500 text-[9px] font-mono tracking-wider uppercase block">US Sales Tax nexus</span>
+                  <div className={`text-base font-bold mt-1 tracking-tight ${isDarkMode ? "text-white" : "text-slate-900"}`}>$8,420.00 USD</div>
+                  <span className="text-emerald-500 font-mono text-[9px] mt-1 inline-block font-semibold">✓ 4 states active</span>
+                </div>
+
+                <div className={`p-4 rounded-2xl border ${isDarkMode ? "bg-white/[0.02] border-white/5" : "bg-white border-slate-100 shadow-sm"}`}>
+                  <span className="text-slate-500 text-[9px] font-mono tracking-wider uppercase block">1099-K Withholdings</span>
+                  <div className={`text-base font-bold mt-1 tracking-tight ${isDarkMode ? "text-white" : "text-slate-900"}`}>$0.00 USD</div>
+                  <span className="text-slate-400 font-mono text-[9px] mt-1 inline-block">Exempt (Registered Corp)</span>
+                </div>
+              </div>
+
+              {/* VAT Breakdown Ledger Table */}
+              <div className={`rounded-2xl border overflow-hidden ${isDarkMode ? "border-white/5 bg-white/[0.01]" : "border-slate-100 bg-white"}`}>
+                <div className={`grid grid-cols-[80px_1fr_100px_100px] p-2.5 font-mono text-[9.5px] font-bold text-slate-400 border-b ${isDarkMode ? "border-white/5 bg-white/[0.02]" : "border-slate-150 bg-slate-50/50"}`}>
+                  <span>COUNTRY</span>
+                  <span>TAX JURISDICTION</span>
+                  <span className="text-right">TOTAL SALES</span>
+                  <span className="text-right font-bold text-[#F5C542]">VAT COLLECTED</span>
+                </div>
+
+                <div className="divide-y divide-slate-150 dark:divide-white/5">
+                  {[
+                    { country: "DE", name: "Germany (Standard 19%)", sales: "€38,400.00", collection: "€7,296.00", color: "🇩🇪" },
+                    { country: "GB", name: "United Kingdom (Standard 20%)", sales: "£28,500.00", collection: "£5,700.00", color: "🇬🇧" },
+                    { country: "FR", name: "France (Standard 20%)", sales: "€18,900.00", collection: "€3,780.00", color: "🇫🇷" },
+                    { country: "ES", name: "Spain (Standard 21%)", sales: "€12,200.00", collection: "€2,562.00", color: "🇪🇸" },
+                  ].map((v, idx) => (
+                    <div key={idx} className="grid grid-cols-[80px_1fr_100px_100px] items-center p-2.5 font-mono text-[10px]">
+                      <span className="text-slate-400 flex items-center gap-1.5 font-sans">
+                        <span>{v.color}</span>
+                        <span className="font-bold">{v.country}</span>
+                      </span>
+                      <span className={isDarkMode ? "text-slate-200" : "text-slate-700"}>{v.name}</span>
+                      <span className="text-slate-400 text-right">{v.sales}</span>
+                      <span className={`text-right font-bold ${isDarkMode ? "text-[#F5C542]" : "text-[#F5C542]"}`}>{v.collection}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* TAB 6: ACTIVITY TIMELINE PREVIEW */}
+          {activeTab === "timeline" && (
+            <div className="space-y-4 animate-fadeIn text-left">
+              <div>
+                <h3 className={`text-base font-semibold tracking-tight ${isDarkMode ? "text-white" : "text-slate-900"}`}>Audit Activity Timeline</h3>
+                <p className="text-slate-400 text-[10px] mt-0.5">Real-time ledger activity and cryptographic verification logs.</p>
+              </div>
+
+              {/* Vertical timeline items */}
+              <div className="space-y-4 relative pl-4 border-l border-slate-200 dark:border-white/5 ml-2.5 my-4">
+                {[
+                  { 
+                    time: "May 29, 2026 - 15:42 UTC", 
+                    event: "Invoice INV-2026-004 cleared.", 
+                    desc: "$48,500.00 USD paid in full by SpaceX Propulsion via Stripe ACH.", 
+                    badge: "SETTLED", 
+                    badgeColor: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20",
+                    sig: "0x7b4a719c2...892cf5ea" 
+                  },
+                  { 
+                    time: "May 28, 2026 - 09:12 UTC", 
+                    event: "Apple Pay clearing authorized.", 
+                    desc: "Vercel Inc cleared INV-2026-003 balance of $14,200.00. Funds routed to primary vault.", 
+                    badge: "SETTLED", 
+                    badgeColor: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20",
+                    sig: "0xcf201d4a0...7b1da329e" 
+                  },
+                  { 
+                    time: "May 25, 2026 - 18:30 UTC", 
+                    event: "Invoice FAK-2026-003 compiled via AI.", 
+                    desc: "Structured invoice sent automatically to billing@vercel.com (Vercel Enterprise).", 
+                    badge: "DISPATCHED", 
+                    badgeColor: "bg-[#F5C542]/10 text-[#F5C542] border-[#F5C542]/20",
+                    sig: "0xe89b023fd...99e82103f" 
+                  },
+                  { 
+                    time: "May 18, 2026 - 11:15 UTC", 
+                    event: "Invoice FAK-2026-002 dispatched.", 
+                    desc: "Slack Technologies registered invoice sequence and pending term of 14 days.", 
+                    badge: "PENDING", 
+                    badgeColor: "bg-violet-500/10 text-violet-500 dark:text-violet-400 border-violet-500/20",
+                    sig: "0x34d5ea891...cf0e9a128" 
+                  }
+                ].map((item, idx) => (
+                  <div key={idx} className="relative group text-left pb-1">
+                    {/* Bullet marker */}
+                    <div className="absolute -left-[22.5px] top-1 w-2.5 h-2.5 rounded-full bg-slate-900 border-2 border-[#F5C542] shrink-0" />
+                    
+                    <div className="flex items-center gap-3">
+                      <span className="text-[10px] font-mono text-slate-500">{item.time}</span>
+                      <span className={`px-2 py-0.5 rounded text-[8px] font-mono font-bold border ${item.badgeColor}`}>
+                        {item.badge}
+                      </span>
+                    </div>
+                    
+                    <h4 className={`text-xs font-bold mt-1 transition-colors ${isDarkMode ? "text-slate-100" : "text-slate-900"}`}>
+                      {item.event}
+                    </h4>
+                    <p className="text-[10px] text-slate-400 mt-0.5 leading-relaxed font-sans">
+                      {item.desc}
+                    </p>
+                    <div className="flex items-center gap-1.5 mt-1">
+                      <span className="text-[8px] font-mono text-slate-500/70">SHA-256 Sig:</span>
+                      <span className="text-[8.5px] font-mono text-gold-500/40 select-all tracking-tight">{item.sig}</span>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           )}

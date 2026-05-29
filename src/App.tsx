@@ -124,7 +124,7 @@ export default function App() {
     
     // Customized luxury golden vector 'F' favicon
     const fillBg = isDarkMode ? "%2307122A" : "%23FFFFFF";
-    const textFill = isDarkMode ? "%23D4AF37" : "%23b59029";
+    const textFill = "%23F5C542";
     const svgStr = `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='${fillBg}'/><text x='10' y='23' font-family='sans-serif' font-weight='950' font-size='20' fill='${textFill}'>F</text></svg>`;
     
     link.href = `data:image/svg+xml;utf8,${svgStr}`;
@@ -225,7 +225,7 @@ export default function App() {
           ? "bg-[#050B1A]/80 border-white/5 text-slate-100" 
           : "bg-[#FCFAF7]/85 border-slate-200/50 text-slate-800"
       }`}>
-        <div className="max-w-7xl mx-auto px-6 sm:px-8 py-5 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-6 sm:px-8 py-3.5 sm:py-5 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <FakturasTextLogo isDarkMode={isDarkMode} />
           </div>
@@ -299,20 +299,25 @@ export default function App() {
 
         {/* Mobile Dropdown menu */}
         {mobileMenuOpen && (
-          <div className={`md:hidden border-t p-6 flex flex-col gap-4 font-sans text-xs text-center transition-all ${
-            isDarkMode ? "bg-[#050B1A] border-white/5 text-slate-100" : "bg-white border-slate-200 text-slate-800"
+          <div className={`absolute top-full left-0 right-0 md:hidden border-b py-2 px-4 shadow-xl z-50 transition-all ${
+            isDarkMode 
+              ? "bg-[#050B1A]/96 border-white/5 text-slate-150 backdrop-blur-md" 
+              : "bg-[#FCFAF7]/96 border-slate-200/80 text-slate-800 backdrop-blur-md"
           }`}>
-            <a href="#features" onClick={() => setMobileMenuOpen(false)} className="hover:text-gold-400 block py-1">FEATURES</a>
-            <a href="#dashboard-play" onClick={() => setMobileMenuOpen(false)} className="hover:text-gold-400 block py-1 text-gold-400">INVOICE BUILDER</a>
-            <a href="#pricing" onClick={() => setMobileMenuOpen(false)} className="hover:text-gold-400 block py-1">PRICING</a>
-            <a href="#contact" onClick={() => setMobileMenuOpen(false)} className="hover:text-gold-400 block py-1">CONTACT</a>
-            <div className={`h-[1px] my-2 ${isDarkMode ? "bg-white/5" : "bg-slate-200"}`}></div>
-            <button 
-              onClick={() => { setMobileMenuOpen(false); scrollToPlayground(); }}
-              className="bg-gradient-to-r from-[#F5C542] to-[#E4B22B] text-[#050B1A] font-semibold tracking-wider py-2.5 rounded-xl block cursor-pointer text-center"
-            >
-              LAUNCH PLATFORM
-            </button>
+            <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-1.5 py-1 text-[10px] font-sans font-bold uppercase tracking-wider">
+              <a href="#features" onClick={() => setMobileMenuOpen(false)} className={`hover:text-[#F5C542] py-0.5 transition-colors ${isDarkMode ? "text-slate-300" : "text-slate-700"}`}>FEATURES</a>
+              <a href="#dashboard-play" onClick={() => setMobileMenuOpen(false)} className="text-[#F5C542] hover:brightness-110 py-0.5 transition-colors">INVOICE BUILDER</a>
+              <a href="#pricing" onClick={() => setMobileMenuOpen(false)} className={`hover:text-[#F5C542] py-0.5 transition-colors ${isDarkMode ? "text-slate-300" : "text-slate-700"}`}>PRICING</a>
+              <a href="#contact" onClick={() => setMobileMenuOpen(false)} className={`hover:text-[#F5C542] py-0.5 transition-colors ${isDarkMode ? "text-slate-300" : "text-slate-700"}`}>CONTACT</a>
+            </div>
+            <div className="pt-1.5 pb-1 flex justify-center">
+              <button 
+                onClick={() => { setMobileMenuOpen(false); scrollToPlayground(); }}
+                className="bg-[#F5C542] hover:bg-[#ffeb99] text-[#050B1A] font-extrabold tracking-[0.12em] py-2 px-5 rounded-[12px] text-[9px] uppercase shadow-[0_4px_12px_rgba(245,197,66,0.2)] active:scale-95 transition-all flex items-center justify-center gap-1.5 cursor-pointer border border-[#F5C542]/20"
+              >
+                LAUNCH PLATFORM
+              </button>
+            </div>
           </div>
         )}
       </header>
@@ -328,13 +333,13 @@ export default function App() {
             <div className="space-y-4 md:space-y-6 flex flex-col justify-center text-left overflow-visible pr-2">
               
               {/* Premium Top Capsule Badge */}
-              <div className={`inline-flex self-start items-center gap-2 px-3.5 py-1.5 rounded-full transition-all select-none shadow-[0_2px_15px_rgba(245,197,66,0.12)] border ${
+              <div className={`inline-flex self-start items-center gap-2 px-3.5 py-1.5 rounded-full transition-all select-none shadow-[0_4px_15px_rgba(245,197,66,0.15)] border ${
                 isDarkMode 
                   ? "bg-[#0a142c]/80 border-[#F5C542]/30 text-[#F5C542]" 
-                  : "bg-gold-100 border-[#F5C542]/35 text-[#a27b13]"
+                  : "bg-white border-[#F5C542]/45 text-[#F5C542]"
               }`}>
                 <Sparkles className="w-3.5 h-3.5 text-[#F5C542] animate-pulse" />
-                <span className={`text-[9px] font-sans tracking-[0.25em] uppercase font-semibold ${isDarkMode ? "text-gold-300" : "text-gold-800"}`}>
+                <span className="text-[9px] font-sans tracking-[0.25em] uppercase font-bold text-[#F5C542]">
                   AI-POWERED INVOICING
                 </span>
                 <ChevronRight className="w-3 h-3 text-[#F5C542]" />
@@ -607,7 +612,7 @@ export default function App() {
           }`}>
             
             <div className="space-y-6">
-              <div className="inline-flex items-center gap-1.5 bg-gold-500/15 border border-gold-500/30 px-3.5 py-1 rounded-full text-[10px] font-mono tracking-widest text-[#D4AF37] uppercase">
+              <div className="inline-flex items-center gap-1.5 bg-gold-500/15 border border-gold-500/30 px-3.5 py-1 rounded-full text-[10px] font-mono tracking-widest text-[#F5C542] uppercase">
                 AI Invoicing Assistant
               </div>
               <h2 className={`font-display font-bold text-3xl sm:text-4xl tracking-tight leading-tight transition-colors duration-300 ${isDarkMode ? "text-white" : "text-[#07122A]"}`}>
@@ -619,15 +624,15 @@ export default function App() {
 
               <div className="space-y-3.5 text-xs font-mono">
                 <div className="flex items-center gap-2.5 font-sans">
-                  <div className="w-5 h-5 rounded-full bg-gold-500/10 border border-gold-500/30 flex items-center justify-center text-[#D4AF37] text-[10px] shrink-0 font-bold font-mono">✓</div>
+                  <div className="w-5 h-5 rounded-full bg-gold-500/10 border border-gold-500/30 flex items-center justify-center text-[#F5C542] text-[10px] shrink-0 font-bold font-mono">✓</div>
                   <span className={isDarkMode ? "text-slate-300" : "text-slate-700"}>Resilient parsing falls back gracefully when offline</span>
                 </div>
                 <div className="flex items-center gap-2.5 font-sans">
-                  <div className="w-5 h-5 rounded-full bg-gold-500/10 border border-gold-500/30 flex items-center justify-center text-[#D4AF37] text-[10px] shrink-0 font-bold font-mono">✓</div>
+                  <div className="w-5 h-5 rounded-full bg-gold-500/10 border border-gold-500/30 flex items-center justify-center text-[#F5C542] text-[10px] shrink-0 font-bold font-mono">✓</div>
                   <span className={isDarkMode ? "text-slate-300" : "text-slate-700"}>Generates structured ledger entries instantly</span>
                 </div>
                 <div className="flex items-center gap-2.5 font-sans">
-                  <div className="w-5 h-5 rounded-full bg-gold-500/10 border border-gold-500/30 flex items-center justify-center text-[#D4AF37] text-[10px] shrink-0 font-bold font-mono">✓</div>
+                  <div className="w-5 h-5 rounded-full bg-gold-500/10 border border-gold-500/30 flex items-center justify-center text-[#F5C542] text-[10px] shrink-0 font-bold font-mono">✓</div>
                   <span className={isDarkMode ? "text-slate-300" : "text-slate-700"}>Forces accurate automatic tax compliance math</span>
                 </div>
               </div>
@@ -637,7 +642,7 @@ export default function App() {
                   onClick={scrollToPlayground}
                   className={`font-semibold text-xs tracking-wider uppercase px-5 py-3 rounded-lg flex items-center gap-2 transition-all ${
                     isDarkMode 
-                      ? "bg-royal-900 hover:bg-royal-800 border border-slate-800 text-gold-400 hover:border-[#D4AF37]/40" 
+                      ? "bg-royal-900 hover:bg-royal-800 border border-slate-800 text-gold-400 hover:border-[#F5C542]/40" 
                       : "bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-850"
                   }`}
                 >
@@ -672,7 +677,7 @@ export default function App() {
                   <span className="text-emerald-500 font-bold">&gt;&gt; EXTRACTED INVOICE OBJECT</span><br />
                   <span className="text-slate-400">Client:</span> Figma, Inc. <br />
                   <span className="text-slate-400">Invoice:</span> FAK-2026-903 <br />
-                  <span className="text-slate-405">Total Valuation:</span> <span className="text-[#D4AF37] font-semibold">€12,500.00 EUR</span>
+                  <span className="text-slate-405">Total Valuation:</span> <span className="text-[#F5C542] font-semibold">€12,500.00 EUR</span>
                 </div>
               </div>
 
@@ -686,7 +691,7 @@ export default function App() {
                 />
                 <button 
                   onClick={scrollToPlayground}
-                  className="bg-gradient-to-r from-[#D4AF37] to-[#B8860B] text-royal-950 font-bold text-[10px] px-3.5 py-1.5 rounded transition-all active:scale-95"
+                  className="bg-[#F5C542] hover:bg-[#ffeb99] text-[#050B1A] font-extrabold text-[10px] px-3.5 py-1.5 rounded transition-all active:scale-95 shadow-md shadow-[#F5C542]/20 border border-[#F5C542]/20"
                 >
                   Try Sandbox
                 </button>
@@ -961,7 +966,7 @@ export default function App() {
             <div className={`col-span-3 p-8 rounded-3xl border transition-all duration-300 flex flex-col justify-between ${
               isDarkMode 
                 ? "bg-royal-950/20 border-royal-800/80 hover:border-gold-500/10 shadow-sm" 
-                : "bg-white border-slate-200/90 shadow-md hover:border-[#D4AF37]/40"
+                : "bg-white border-slate-200/90 shadow-md hover:border-[#F5C542]/40"
             }`}>
               
               {contactSuccess ? (
@@ -995,7 +1000,7 @@ export default function App() {
                           className={`w-full border rounded-xl p-3 text-xs focus:outline-none transition-colors duration-300 font-sans ${
                             isDarkMode 
                               ? "bg-royal-950/50 border-royal-800 text-white focus:border-gold-500/30" 
-                              : "bg-slate-50 border-slate-200 text-[#07122A] focus:border-[#D4AF37]/50"
+                              : "bg-slate-50 border-slate-200 text-[#07122A] focus:border-[#F5C542]/50"
                           }`}
                         />
                       </div>
@@ -1010,7 +1015,7 @@ export default function App() {
                           className={`w-full border rounded-xl p-3 text-xs focus:outline-none transition-colors duration-300 font-sans ${
                             isDarkMode 
                               ? "bg-royal-950/50 border-royal-800 text-white focus:border-gold-500/30" 
-                              : "bg-slate-50 border-slate-200 text-[#07122A] focus:border-[#D4AF37]/50"
+                              : "bg-slate-50 border-slate-200 text-[#07122A] focus:border-[#F5C542]/50"
                           }`}
                         />
                       </div>
@@ -1024,7 +1029,7 @@ export default function App() {
                         className={`w-full border rounded-xl p-3 text-xs focus:outline-none transition-colors duration-300 font-sans cursor-pointer ${
                           isDarkMode 
                             ? "bg-royal-950/60 border-royal-800 text-white focus:border-gold-500/30" 
-                            : "bg-slate-50 border-slate-200 text-[#07122A] focus:border-[#D4AF37]/50"
+                            : "bg-slate-50 border-slate-200 text-[#07122A] focus:border-[#F5C542]/50"
                         }`}
                       >
                         <option value="enterprise">Enterprise Ledger Suite ($149)</option>
@@ -1045,7 +1050,7 @@ export default function App() {
                         className={`w-full border rounded-xl p-3 text-xs focus:outline-none transition-colors duration-300 font-sans resize-none ${
                           isDarkMode 
                             ? "bg-royal-950/50 border-royal-800 text-white focus:border-gold-500/30" 
-                            : "bg-slate-50 border-slate-200 text-[#07122A] focus:border-[#D4AF37]/50"
+                            : "bg-slate-50 border-slate-200 text-[#07122A] focus:border-[#F5C542]/50"
                         }`}
                       ></textarea>
                     </div>
@@ -1129,13 +1134,13 @@ export default function App() {
             <div className="space-y-4 text-left">
               <div className="flex items-center gap-2">
                 <svg className="w-7 h-7 text-gold-500" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect width="100" height="100" rx="22" fill="#0B1736" stroke="rgba(212, 175, 55, 0.2)" strokeWidth="1" />
+                  <rect width="100" height="100" rx="22" fill="#0B1736" stroke="rgba(245, 197, 66, 0.2)" strokeWidth="1" />
                   <path d="M35 30H65V40H47V50H60V60H47V75H35V30Z" fill="url(#gold-grad-footer)" />
                   <defs>
                     <linearGradient id="gold-grad-footer" x1="35" y1="30" x2="65" y2="75" gradientUnits="userSpaceOnUse">
                       <stop stopColor="#F3E9BD" />
-                      <stop offset="0.5" stopColor="#D4AF37" />
-                      <stop offset="1" stopColor="#937121" />
+                      <stop offset="0.5" stopColor="#F5C542" />
+                      <stop offset="1" stopColor="#E0AC22" />
                     </linearGradient>
                   </defs>
                 </svg>

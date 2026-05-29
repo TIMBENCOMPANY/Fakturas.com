@@ -24,9 +24,9 @@ export function FakturasLogo({ className = "", size = "md" }: LogoProps) {
         {/* Absolute high-end premium liquid brass and gold gradient */}
         <linearGradient id="luxury-gold" x1="10" y1="10" x2="90" y2="90" gradientUnits="userSpaceOnUse">
           <stop offset="0%" stopColor="#FFF7D6" />
-          <stop offset="25%" stopColor="#ECC561" />
-          <stop offset="70%" stopColor="#D4AF37" />
-          <stop offset="100%" stopColor="#8F7122" />
+          <stop offset="25%" stopColor="#ffeb99" />
+          <stop offset="70%" stopColor="#F5C542" />
+          <stop offset="100%" stopColor="#E4B22B" />
         </linearGradient>
       </defs>
       

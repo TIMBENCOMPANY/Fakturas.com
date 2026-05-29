@@ -31,6 +31,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,850;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
 @import "tailwindcss";
 
+:root {
+  --fakturas-gold: #F5C542;
+}
+
 @theme {
   --font-sans: "Inter", system-ui, -apple-system, sans-serif;
   --font-display: "Safira March", "Safir March", "Safira March Personal Use", "Playfair Display", Georgia, serif;
@@ -39,15 +43,15 @@
 
   /* Premium luxury palette - Geometric Balance Theme */
   --color-gold-50: #fdfbf2;
-  --color-gold-100: #fbf7da;
-  --color-gold-200: #fff4d2;
+  --color-gold-100: #ffeb99;
+  --color-gold-200: #ffeb99;
   --color-gold-300: #ffeb99;
-  --color-gold-400: #F5C542; /* Hotter Gold Accent from user */
-  --color-gold-500: #F5C542; /* Trademark Luxury Light Gold from user */
-  --color-gold-600: #E4B22B; /* Darker Gold Accent */
-  --color-gold-700: #C5971C;
-  --color-gold-800: #a27b13;
-  --color-gold-900: #7d5e0b;
+  --color-gold-400: var(--fakturas-gold);
+  --color-gold-500: var(--fakturas-gold);
+  --color-gold-600: var(--fakturas-gold);
+  --color-gold-700: var(--fakturas-gold);
+  --color-gold-800: var(--fakturas-gold);
+  --color-gold-900: var(--fakturas-gold);
 
   --color-royal-50: #f0f4fa;
   --color-royal-105: #0a142c; /* Darker navy accent panel */
@@ -135,14 +139,15 @@ body {
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  color: transparent;
+  color: #F5C542;
 }
 
 .text-gold-pure-gradient {
-  background: linear-gradient(135deg, #ffeb99 0%, #F5C542 50%, #C5971C 100%);
+  background: linear-gradient(135deg, #ffeb99 0%, #F5C542 50%, #ffd466 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+  color: #F5C542;
 }
 
 /* Geometric Balance buttons and shadows */

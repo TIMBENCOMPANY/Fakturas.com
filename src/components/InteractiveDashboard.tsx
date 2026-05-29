@@ -362,7 +362,7 @@ export default function InteractiveDashboard({ onAiStart, syntheticInvoice, rese
         <div className={`fixed top-8 right-8 z-50 px-6 py-4 rounded-xl flex items-center gap-3 animate-bounce border shadow-lg transition-all duration-300 ${
           isDarkMode 
             ? "glass-panel border-gold-500/30 bg-royal-950 text-white shadow-gold-heavy" 
-            : "bg-white border-[#D4AF37]/45 text-slate-900 shadow-md"
+            : "bg-white border-[#F5C542]/45 text-slate-900 shadow-md"
         }`}>
           <CheckCircle2 className={`w-5 h-5 ${isDarkMode ? "text-gold-400" : "text-gold-600"}`} />
           <p className="text-sm font-medium tracking-wide">{toast}</p>
@@ -382,13 +382,13 @@ export default function InteractiveDashboard({ onAiStart, syntheticInvoice, rese
           </div>
           <div className={`h-6 w-px max-sm:hidden ${isDarkMode ? "bg-white/10" : "bg-slate-200"}`}></div>
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-[#D4AF37] to-[#F9E29B] flex items-center justify-center shadow-md shadow-[#D4AF37]/10">
+            <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-[#F5C542] to-[#ffeb99] flex items-center justify-center shadow-md shadow-[#F5C542]/10">
               <span className="font-display font-bold text-[#07122A] text-sm italic select-none">F</span>
             </div>
             <div className="text-left">
               <div className="flex items-center gap-2">
                 <h2 className={`font-display font-medium tracking-wider text-xs ${isDarkMode ? "text-slate-350" : "text-slate-800"}`}>Fakturas Cloud Dashboard</h2>
-                <span className="bg-[#D4AF37]/10 text-[#D4AF37] text-[8px] font-mono px-2 py-0.5 rounded-full border border-[#D4AF37]/20 uppercase tracking-widest animate-pulse font-bold">PRO LEDGER</span>
+                <span className="bg-[#F5C542]/10 text-[#F5C542] text-[8px] font-mono px-2 py-0.5 rounded-full border border-[#F5C542]/20 uppercase tracking-widest animate-pulse font-bold">PRO LEDGER</span>
               </div>
               <p className="text-[9px] text-slate-500 font-mono uppercase">Node Node Active // Secure Cloud Sandbox Mode</p>
             </div>
@@ -399,7 +399,7 @@ export default function InteractiveDashboard({ onAiStart, syntheticInvoice, rese
         <div className={`flex items-center gap-6 text-xs font-mono border-l pl-6 max-sm:hidden ${isDarkMode ? "border-white/10" : "border-slate-200"}`}>
           <div className="text-left">
             <span className="text-slate-500 text-[10px] block uppercase font-bold tracking-wider">Liquid Funds</span>
-            <span className={`font-semibold ${isDarkMode ? "text-[#D4AF37]" : "text-gold-650"}`}>${Number(stats.paid).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+            <span className={`font-semibold ${isDarkMode ? "text-[#F5C542]" : "text-[#F5C542]"}`}>${Number(stats.paid).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
           </div>
           <div className="text-left">
             <span className="text-slate-500 text-[10px] block uppercase font-bold tracking-wider">Receivables</span>
@@ -436,7 +436,7 @@ export default function InteractiveDashboard({ onAiStart, syntheticInvoice, rese
             setActiveTab("invoices");
             triggerToast("Draft invoice created!");
           }}
-          className="bg-gradient-to-r from-[#D4AF37] to-[#B8860B] hover:brightness-110 text-[#07122A] hover:scale-[1.02] transform transition-all font-bold rounded-lg text-xs px-4 py-2 flex items-center gap-2 shadow-lg shadow-[#D4AF37]/10 shrink-0"
+          className="bg-[#F5C542] hover:bg-[#ffeb99] text-[#050B1A] hover:scale-[1.02] transform transition-all font-bold rounded-lg text-xs px-4 py-2 flex items-center gap-2 shadow-lg shadow-[#F5C542]/15 shrink-0 border border-[#F5C542]/20"
         >
           <Plus className="w-3.5 h-3.5 stroke-[2.5]" />
           Create Invoice
@@ -467,7 +467,7 @@ export default function InteractiveDashboard({ onAiStart, syntheticInvoice, rese
                     isActive 
                       ? isDarkMode
                         ? "bg-gold-500/10 border-gold-500/30 text-gold-400 shadow-gold-subtle" 
-                        : "bg-gold-500/15 border-gold-500/40 text-[#b59029] shadow-md shadow-gold-400/5"
+                        : "bg-gold-500/15 border-gold-500/40 text-[#F5C542] shadow-md shadow-gold-400/5"
                       : isDarkMode
                         ? "text-slate-400 hover:text-white hover:bg-royal-850/50 border-transparent"
                         : "text-slate-500 hover:text-slate-900 hover:bg-slate-100/80 border-transparent"
@@ -476,7 +476,7 @@ export default function InteractiveDashboard({ onAiStart, syntheticInvoice, rese
                   <Icon className={`w-5 h-5 transition-transform duration-300 group-hover:scale-110 ${tab.colorClass || ""}`} />
                   <span className={`text-[8px] font-mono tracking-wider font-bold select-none transition-colors ${
                     isActive 
-                      ? isDarkMode ? "text-gold-400" : "text-[#b59029]"
+                      ? isDarkMode ? "text-gold-400" : "text-[#F5C542]"
                       : isDarkMode ? "text-slate-500 group-hover:text-slate-300" : "text-slate-500 group-hover:text-slate-900"
                   }`}>
                     {tab.label.toUpperCase()}
@@ -541,7 +541,7 @@ export default function InteractiveDashboard({ onAiStart, syntheticInvoice, rese
                     className={`w-full border rounded-lg pl-9 pr-4 py-2 text-xs focus:outline-none transition-colors duration-300 font-mono ${
                       isDarkMode 
                         ? "bg-royal-950/50 border-royal-800 text-white focus:border-gold-500/30" 
-                        : "bg-white border-slate-200 text-[#07122A] focus:border-[#D4AF37]/50"
+                        : "bg-white border-slate-200 text-[#07122A] focus:border-[#F5C542]/50"
                     }`}
                   />
                 </div>
@@ -593,7 +593,7 @@ export default function InteractiveDashboard({ onAiStart, syntheticInvoice, rese
                               inv.status === 'paid' 
                                 ? "bg-emerald-500/10 text-emerald-500 border-emerald-500/20 font-bold" 
                                 : inv.status === 'pending' 
-                                ? "bg-amber-500/10 text-amber-500 border-amber-500/20 font-bold" 
+                                ? "bg-[#F5C542]/10 text-[#F5C542] border-[#F5C542]/20 font-bold" 
                                 : inv.status === 'overdue' 
                                 ? "bg-rose-500/10 text-rose-550 border-rose-550/20 font-bold animate-pulse" 
                                 : "bg-slate-500/10 text-slate-550 border-slate-550/20"
@@ -807,7 +807,7 @@ export default function InteractiveDashboard({ onAiStart, syntheticInvoice, rese
                         isDarkMode ? "bg-royal-950/80 border-royal-800" : "bg-slate-50 border-slate-200"
                       }`}>
                         <div className="flex items-center gap-2">
-                          <CheckCircle2 className={`w-4 h-4 ${activeInvoice.status === 'paid' ? "text-emerald-500" : "text-amber-500"}`} />
+                          <CheckCircle2 className={`w-4 h-4 ${activeInvoice.status === 'paid' ? "text-emerald-500" : "text-[#F5C542]"}`} />
                           <span className={`font-mono text-xs font-semibold uppercase tracking-wider ${isDarkMode ? "text-slate-300" : "text-slate-700"}`}>{activeInvoice.invoiceNumber} PREVIEW</span>
                         </div>
                         <div className="flex gap-2 font-mono text-[10px]">
@@ -871,7 +871,7 @@ export default function InteractiveDashboard({ onAiStart, syntheticInvoice, rese
                                 <h4 className="font-mono text-[9px] text-slate-400 uppercase tracking-widest mb-1">SETTLEMENT INSTRUCTIONS</h4>
                                 <p className="text-[10px] text-slate-600 font-mono">Direct Bank Transfer (ACH / SEPA Swift)<br />IBAN US89 4000 1200 4821 9831</p>
                               </div>
-                              <p className="text-[9px] text-slate-400 font-mono text-right mt-2 uppercase underline decoration-[#D4AF37]">NET 14 COMPLIANT</p>
+                              <p className="text-[9px] text-slate-400 font-mono text-right mt-2 uppercase underline decoration-[#F5C542]">NET 14 COMPLIANT</p>
                             </div>
                           </div>
 
@@ -959,10 +959,10 @@ export default function InteractiveDashboard({ onAiStart, syntheticInvoice, rese
               
               <div className={`p-6 rounded-2xl border flex flex-col justify-between min-h-[500px] relative group overflow-hidden transition-all duration-300 ${
                 isDarkMode 
-                  ? "bg-gradient-to-br from-[#0E1B3E] to-[#14234C] border-[#D4AF37]/30 text-white" 
+                  ? "bg-gradient-to-br from-[#0E1B3E] to-[#14234C] border-[#F5C542]/30 text-white" 
                   : "bg-white border-slate-205 text-slate-800 shadow-sm"
               }`}>
-                <div className="absolute -top-10 -right-10 w-32 h-32 bg-[#D4AF37]/10 rounded-full blur-2xl pointer-events-none"></div>
+                <div className="absolute -top-10 -right-10 w-32 h-32 bg-[#F5C542]/10 rounded-full blur-2xl pointer-events-none"></div>
                 
                 {/* Visual state headers */}
                 <div className={`border-b pb-4 mb-4 ${isDarkMode ? "border-royal-800" : "border-slate-150"}`}>
@@ -991,7 +991,7 @@ export default function InteractiveDashboard({ onAiStart, syntheticInvoice, rese
                   {invoices.length > 4 && (
                     <div className="flex items-start gap-3 justify-end text-right">
                       <div className={`border p-3 rounded-lg max-w-[80%] text-xs leading-relaxed font-mono text-left ${
-                        isDarkMode ? "bg-[#D4AF37]/10 border-[#D4AF37]/30 text-slate-300" : "bg-gold-500/5 border-[#D4AF37]/45 text-slate-700"
+                        isDarkMode ? "bg-[#F5C542]/10 border-[#F5C542]/30 text-slate-300" : "bg-gold-500/5 border-[#F5C542]/45 text-slate-700"
                       }`}>
                         Create transaction ledger logs for the newly imported corporate client.
                       </div>
@@ -1017,7 +1017,7 @@ export default function InteractiveDashboard({ onAiStart, syntheticInvoice, rese
                         className={`border transition-all text-[10px] font-mono px-3 py-1.5 rounded-lg text-left ${
                           isDarkMode 
                             ? "bg-royal-950/50 hover:bg-gold-500/10 border-royal-800 hover:border-gold-500/30 text-slate-300 hover:text-white" 
-                            : "bg-slate-50 hover:bg-gold-500/5 border-slate-200 hover:border-[#D4AF37]/40 text-slate-650 hover:text-slate-900 shadow-sm"
+                            : "bg-slate-50 hover:bg-gold-500/5 border-slate-200 hover:border-[#F5C542]/40 text-slate-650 hover:text-slate-900 shadow-sm"
                         }`}
                       >
                         "{sample}"
@@ -1161,13 +1161,12 @@ export default function InteractiveDashboard({ onAiStart, syntheticInvoice, rese
         </main>
       </div>
 
-      {/* Decorative metal casing screws or indicators */}
+      {/* Footer casing bar */}
       <div className="bg-royal-950 border-t border-royal-800 px-6 py-2.5 text-[9px] font-mono text-slate-500 flex justify-between items-center max-sm:flex-col gap-1 select-none">
-        <span>Fakturas Financial Core SHA-256 Validated</span>
+        <span>&copy; 2026 Fakturas. Bank-grade 256-bit SSL encrypted.</span>
         <div className="flex gap-4">
-          <span>PORT: 3000</span>
-          <span>LATENCY: 14ms</span>
-          <span className="text-[#D4AF37]">&bull; STABLE</span>
+          <span>SaaS Ledger Core v1.4</span>
+          <span className="text-[#F5C542]">&bull; SECURE</span>
         </div>
       </div>
     </div>

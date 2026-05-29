@@ -90,7 +90,7 @@ export default function AILoader({ onComplete, promptText }: AILoaderProps) {
                   <p className="text-sm tracking-wide">{step.text}</p>
                 </div>
                 {isCompleted && (
-                  <span className="text-[10px] font-mono tracking-widest text-[#D4AF37]">DONE</span>
+                  <span className="text-[10px] font-mono tracking-widest text-[#F5C542]">DONE</span>
                 )}
                 {IsActive && (
                   <div className="flex gap-1">
@@ -106,7 +106,7 @@ export default function AILoader({ onComplete, promptText }: AILoaderProps) {
         {/* Progress bar */}
         <div className="mt-8 bg-royal-900 h-1.5 rounded-full overflow-hidden border border-slate-800 p-[1px]">
           <div 
-            className="bg-gradient-to-r from-gold-600 to-gold-400 h-full rounded-full transition-all duration-300 ease-out shadow-[0_0_10px_#D4AF37]"
+            className="bg-gradient-to-r from-gold-600 to-gold-400 h-full rounded-full transition-all duration-300 ease-out shadow-[0_0_10px_rgba(245,197,66,0.3)]"
             style={{ width: `${(currentStep / steps.length) * 100}%` }}
           ></div>
         </div>
