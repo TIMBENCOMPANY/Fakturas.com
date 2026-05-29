@@ -1,0 +1,168 @@
+@font-face {
+  font-family: "Safira March";
+  src: url("https://db.onlinewebfonts.com/t/3297a7e1f468dc88d8b9d36de3cae966.woff2") format("woff2"),
+       url("https://db.onlinewebfonts.com/t/3297a7e1f468dc88d8b9d36de3cae966.woff") format("woff"),
+       url("https://db.onlinewebfonts.com/t/3297a7e1f468dc88d8b9d36de3cae966.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Safir March";
+  src: url("https://db.onlinewebfonts.com/t/3297a7e1f468dc88d8b9d36de3cae966.woff2") format("woff2"),
+       url("https://db.onlinewebfonts.com/t/3297a7e1f468dc88d8b9d36de3cae966.woff") format("woff"),
+       url("https://db.onlinewebfonts.com/t/3297a7e1f468dc88d8b9d36de3cae966.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Safira March Personal Use";
+  src: url("https://db.onlinewebfonts.com/t/3297a7e1f468dc88d8b9d36de3cae966.woff2") format("woff2"),
+       url("https://db.onlinewebfonts.com/t/3297a7e1f468dc88d8b9d36de3cae966.woff") format("woff"),
+       url("https://db.onlinewebfonts.com/t/3297a7e1f468dc88d8b9d36de3cae966.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,850;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --font-display: "Safira March", "Safir March", "Safira March Personal Use", "Playfair Display", Georgia, serif;
+  --font-serif-luxury: "Safira March", "Safir March", "Safira March Personal Use", "Playfair Display", Georgia, serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  /* Premium luxury palette - Geometric Balance Theme */
+  --color-gold-50: #fefcf3;
+  --color-gold-100: #faf6de;
+  --color-gold-200: #fef4cf;
+  --color-gold-300: #F3C76B;
+  --color-gold-400: #F3C76B; /* Hotter Gold Accent from user */
+  --color-gold-500: #D4A64F; /* Trademark Luxury Light Gold from user */
+  --color-gold-600: #C2953E; /* Darker Gold Accent */
+  --color-gold-700: #937121;
+  --color-gold-800: #74571d;
+  --color-gold-900: #60471c;
+
+  --color-royal-50: #f0f4fa;
+  --color-royal-105: #081120; /* Darker navy accent panel */
+  --color-royal-110: #0d1a33; /* Ambient accent panels */
+  --color-royal-200: #bed1ea;
+  --color-royal-300: #94b2da;
+  --color-royal-400: #658cc7;
+  --color-royal-500: #456db4;
+  --color-royal-600: #335496;
+  --color-royal-700: #29437a;
+  --color-royal-800: #1b274c;
+  --color-royal-900: #081120; /* Deep navy blue background component */
+  --color-royal-950: #050816; /* Main Cinematic Dark Black-Navy Canvas */
+
+  --animate-pulse-slow: pulse 6s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-spin-slow: spin 20s linear infinite;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-glow: glow 4s ease-in-out infinite;
+
+  --shadow-gold-heavy: 0 10px 35px -5px rgba(212, 166, 79, 0.22);
+  --shadow-gold-subtle: 0 4px 25px -2px rgba(212, 166, 79, 0.06);
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes glow {
+  0%, 100% { opacity: 0.3; filter: brightness(1); }
+  50% { opacity: 0.6; filter: brightness(1.2); }
+}
+
+/* Base custom styles to ensure luxury typography and dark mode transitions */
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-royal-950);
+  background-image: radial-gradient(circle at 50% 0%, #081120 0%, #050816 100%);
+  background-attachment: fixed;
+  overflow-x: hidden;
+}
+
+/* Webkit scrollbar customized in premium gold & deep blue */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #050816;
+}
+::-webkit-scrollbar-thumb {
+  background: #0d1a33;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #D4A64F;
+}
+
+/* Glassmorphism utility card */
+.glass-panel {
+  background: rgba(8, 17, 32, 0.4);
+  backdrop-filter: blur(12px) saturate(140%);
+  -webkit-backdrop-filter: blur(12px) saturate(140%);
+  border: 1px solid rgba(212, 166, 79, 0.08);
+}
+
+.glass-panel-heavy {
+  background: rgba(8, 17, 32, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(212, 166, 79, 0.12);
+}
+
+.gold-border-glow {
+  border: 1px solid rgba(212, 166, 79, 0.08);
+  box-shadow: 0 0 15px -1px rgba(212, 166, 79, 0.03);
+}
+.gold-border-glow:hover {
+  border-color: rgba(212, 166, 79, 0.25);
+  box-shadow: 0 0 25px -3px rgba(212, 166, 79, 0.1);
+}
+
+.text-gold-gradient {
+  background: linear-gradient(to right, #D4A64F, #F3C76B, #D4A64F);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.text-gold-pure-gradient {
+  background: linear-gradient(135deg, #F3C76B 0%, #D4A64F 50%, #C2953E 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Geometric Balance buttons and shadows */
+.btn-gold-brand {
+  background: linear-gradient(to right, #D4A64F, #C2953E);
+  color: #050816;
+  box-shadow: 0 10px 25px -5px rgba(212, 166, 79, 0.18);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.btn-gold-brand:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+  box-shadow: 0 12px 30px -4px rgba(212, 166, 79, 0.28);
+}
+
+.border-geom-subtle {
+  border-color: rgba(255, 255, 255, 0.05);
+}
+
+.border-geom-strong {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
